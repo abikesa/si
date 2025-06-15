@@ -1,32 +1,75 @@
-# Book settings
-# Learn more at https://jupyterbook.org/customize/config.html
+# A default configuration for your Jupyter Book
 
-title: Stata Programming
-author: Abimereki Muzaale
-logo: ./jhu-logo.jpeg
+#######################################################################################
+# Book metadata
 
-# Force re-execution of notebooks on each build.
-# See https://jupyterbook.org/content/execute.html
+title                       : Stata Programming
+author                      : 
+copyright                   : "2025"
+logo                        : ./jhu-logo.jpeg
+email                       : "abikesa.sh@gmail.com"
+exclude_patterns            : ["LICENSE.md"]
+
+#######################################################################################
+# Notebook execution
+
 execute:
-  execute_notebooks: force
+  execute_notebooks         : auto
+  cache                     : ""
+  exclude_patterns          : ["LICENSE.md"]
 
-# Define the name of the latex output file for PDF builds
-latex:
-  latex_documents:
-    targetname: book.tex
+#######################################################################################
+# HTML settings
 
-# Add a bibtex file so that we can create citations
-bibtex_bibfiles:
-  - references.bib
-
-# Information about where the book exists on the web
-repository:
-  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
-
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
-  use_issues_button: true
-  use_repository_button: true
+  navbar_number_sections    : False
+  home_page_in_navbar       : True
+  use_repository_button     : False
+  use_issues_button         : False
+  use_edit_page_button      : False
+  extra_footer              : |
+    Copyright © Abimereki Muzaale
+  comments:
+    hypothesis              : False
+  extra_css:
+    - "_static/custom.css"
+  favicon                   : "https://abikesa.github.io/favicon/assets/favicon-dark.ico"
+
+#######################################################################################
+# Launch buttons
+
+launch_buttons:
+  notebook_interface        : "classic"
+  binderhub_url             : "https://mybinder.org"
+  jupyterhub_url            : ""      
+  thebelab                  : false
+
+#######################################################################################
+# Repository settings
+
+repository:
+  url                       : https://github.com/abikesa/template
+  path_to_book              : "book/website"
+  branch                    : main
+
+#######################################################################################
+# Advanced / Sphinx config
+
+sphinx:
+  extra_extensions:
+    - 'sphinx_panels'
+    - 'sphinxcontrib.bibtex'
+  config:
+    language: en
+    suppress_warnings:
+      - 'app.add_node'
+      - 'app.add_directive'
+      - 'app.add_role'
+    myst_heading_anchors: 5
+    bibtex_bibfiles:
+      - _bibliography/references.bib
+    bibtex_reference_order: 'citation'
+    bibtex_default_style: 'unsrt'
+    bibtex_reference_style: 'super'
+    bibtex_cite_style: 'super'
+    bibtex_footbibliography_header: ''
