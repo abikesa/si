@@ -5,7 +5,7 @@
 
 title                       : Stata Programming
 author                      : 
-copyright                   : "2025"
+copyright                   :  
 logo                        : ./jhu-logo.jpeg
 email                       : "abikesa.sh@gmail.com"
 exclude_patterns            : ["LICENSE.md"]
