@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ukubona Inc — Payroll Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/payroll.css">
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-white">💰 Ukubona Payroll</h1>
+      
+      <div class="columns">
+        <div class="column is-half">
+          <div class="box has-background-dark">
+            <h2 class="subtitle has-text-white">Employee Information</h2>
+            <div class="field">
+              <label class="label has-text-white">Employee ID</label>
+              <div class="control">
+                <input class="input" type="text" id="employee-id" value="UKB-8160" readonly>
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label has-text-white">Pay Period</label>
+              <div class="control">
+                <input class="input" type="text" id="pay-period" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="column is-half">
+          <div class="box has-background-dark">
+            <h2 class="subtitle has-text-white">Compensation</h2>
+            <div class="field">
+              <label class="label has-text-white">Hourly Rate</label>
+              <div class="control">
+                <input class="input" type="number" id="hourly-rate" value="25.00">
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label has-text-white">Weekly Hours</label>
+              <div class="control">
+                <input class="input" type="number" id="weekly-hours" value="23">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="box has-background-dark">
+        <h2 class="subtitle has-text-white">Paystub</h2>
+        <table class="table is-fullwidth is-hoverable">
+          <thead>
+            <tr>
+              <th class="has-text-white">Description</th>
+              <th class="has-text-white">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="has-text-white">Gross Pay</td>
+              <td class="has-text-white" id="gross-pay">$0.00</td>
+            </tr>
+            <tr>
+              <td class="has-text-white">Federal Tax</td>
+              <td class="has-text-white" id="federal-tax">$0.00</td>
+            </tr>
+            <tr>
+              <td class="has-text-white">Social Security</td>
+              <td class="has-text-white" id="ss-tax">$0.00</td>
+            </tr>
+            <tr>
+              <td class="has-text-white">Medicare</td>
+              <td class="has-text-white" id="medicare">$0.00</td>
+            </tr>
+            <tr>
+              <td class="has-text-white">State Tax (MD)</td>
+              <td class="has-text-white" id="state-tax">$0.00</td>
+            </tr>
+            <tr class="has-background-grey-darker">
+              <td class="has-text-weight-bold has-text-white">Net Pay</td>
+              <td class="has-text-weight-bold has-text-success" id="net-pay">$0.00</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="buttons is-right">
+          <button class="button is-link" id="calculate-btn">Calculate</button>
+          <button class="button is-success" id="export-btn">Export CSV</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/static/js/payroll.js"></script>
+</body>
+</html>

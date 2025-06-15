@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ukubona Inc — Signal Noise Simulation Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+  <style>
+    /* Existing styles... */
+    body {
+      background-color: #0a0f1c;
+      color: #fff;
+    }
+    .task-card {
+      background-color: #1a1f2c;
+      border-left: 4px solid #00d1b2;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      position: relative;
+    }
+    /* Keep all your existing styles... */
+
+    /* New Paystub Styles */
+    .paystub-card {
+      background-color: #1a1f2c;
+      border-left: 4px solid #9467bd;
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+    }
+    .paystub-table {
+      width: 100%;
+      margin-top: 1rem;
+    }
+    .paystub-table th {
+      text-align: left;
+      padding: 0.5rem;
+      background: #2a2f3c;
+    }
+    .paystub-table td {
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid #444;
+    }
+    .net-pay-row {
+      font-weight: bold;
+      background: #2a2f3c;
+    }
+    .net-pay-amount {
+      color: #48c774;
+    }
+    .paystub-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-white">📊 Ukubona Inc — Simulation Dashboard</h1>
+
+      <!-- NEW PAYSTUB SECTION -->
+      <div class="paystub-card">
+        <h2 class="subtitle has-text-white">💰 Payroll Overview</h2>
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <div class="field">
+              <label class="label has-text-white">Employee</label>
+              <div class="control">
+                <input class="input" type="text" id="payroll-employee" value="UKB-8160" readonly>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label has-text-white">Pay Period</label>
+              <div class="control">
+                <input class="input" type="text" id="payroll-period" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <table class="paystub-table">
+          <thead>
+            <tr>
+              <th class="has-text-white">Description</th>
+              <th class="has-text-white">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="has-text-white">Gross Pay</td>
+              <td class="has-text-white" id="payroll-gross">$0.00</td>
+            </tr>
+            <tr>
+              <td class="has-text-white">Federal Tax</td>
+              <td class="has-text-white" id="payroll-federal">$0.00</td>
+            </tr>
+            <tr>
+              <td class="has-text-white">Social Security</td>
+              <td class="has-text-white" id="payroll-ss">$0.00</td>
+            </tr>
+            <tr>
+              <td class="has-text-white">Medicare</td>
+              <td class="has-text-white" id="payroll-medicare">$0.00</td>
+            </tr>
+            <tr>
+              <td class="has-text-white">State Tax (MD)</td>
+              <td class="has-text-white" id="payroll-state">$0.00</td>
+            </tr>
+            <tr class="net-pay-row">
+              <td class="has-text-white">Net Pay</td>
+              <td class="net-pay-amount" id="payroll-net">$0.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="paystub-controls">
+          <button class="button is-link is-small" onclick="calculatePayroll()">Calculate</button>
+          <button class="button is-success is-small" onclick="exportPayroll()">Export CSV</button>
+        </div>
+      </div>
+
+      <!-- EXISTING DASHBOARD CONTENT -->
+      <div class="selectors">
+        <div class="select">
+          <select id="roleSelect"></select>
+        </div>
+        <div class="select">
+          <select id="scopeSelect">
+            <option value="Tactical">Tactical</option>
+            <option value="Informational">Informational</option>
+            <option value="Strategic">Strategic</option>
+            <option value="Operational">Operational</option>
+            <option value="Existential">Existential</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="button is-link" onclick="exportCSV()">Export CSV</button>
+        <button class="button is-warning" onclick="document.getElementById('csvInput').click()">Import CSV</button>
+        <button class="button is-info" onclick="exportAllJSON()">Export JSON</button>
+        <input type="file" id="csvInput" accept=".csv" style="display: none;">
+      </div>
+
+      <div id="dashboard"></div>
+    </div>
+  </section>
+
+  <script>
+    // Existing dashboard JavaScript code...
+
+    // NEW PAYROLL FUNCTIONS
+    function calculatePayroll() {
+      const HOURLY_RATE = 25.00;
+      const WEEKLY_HOURS = 23;
+      const FEDERAL_TAX_RATE = 0.12;
+      const SOCIAL_SECURITY_RATE = 0.062;
+      const MEDICARE_RATE = 0.0145;
+      const STATE_TAX_RATE = 0.05;
+
+      // Calculate current pay period (1st to last day of current month)
+      const now = new Date();
+      const startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+      const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      document.getElementById('payroll-period').value = 
+        `${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}`;
+
+      // Calculate weeks in period
+      const daysInPeriod = (endDate - startDate) / (1000 * 60 * 60 * 24);
+      const weeksInPeriod = daysInPeriod / 7;
+
+      // Calculate amounts
+      const gross = HOURLY_RATE * WEEKLY_HOURS * weeksInPeriod;
+      const federal = gross * FEDERAL_TAX_RATE;
+      const ss = gross * SOCIAL_SECURITY_RATE;
+      const medicare = gross * MEDICARE_RATE;
+      const state = gross * STATE_TAX_RATE;
+      const net = gross - federal - ss - medicare - state;
+
+      // Update display
+      document.getElementById('payroll-gross').textContent = `$${gross.toFixed(2)}`;
+      document.getElementById('payroll-federal').textContent = `$${federal.toFixed(2)}`;
+      document.getElementById('payroll-ss').textContent = `$${ss.toFixed(2)}`;
+      document.getElementById('payroll-medicare').textContent = `$${medicare.toFixed(2)}`;
+      document.getElementById('payroll-state').textContent = `$${state.toFixed(2)}`;
+      document.getElementById('payroll-net').textContent = `$${net.toFixed(2)}`;
+    }
+
+    function exportPayroll() {
+      const rows = [
+        ['Description', 'Amount'],
+        ['Employee', document.getElementById('payroll-employee').value],
+        ['Pay Period', document.getElementById('payroll-period').value],
+        ['Gross Pay', document.getElementById('payroll-gross').textContent],
+        ['Federal Tax', document.getElementById('payroll-federal').textContent],
+        ['Social Security', document.getElementById('payroll-ss').textContent],
+        ['Medicare', document.getElementById('payroll-medicare').textContent],
+        ['State Tax', document.getElementById('payroll-state').textContent],
+        ['Net Pay', document.getElementById('payroll-net').textContent]
+      ];
+
+      const csvContent = rows.map(row => row.join(',')).join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ukubona_paystub_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      
+      URL.revokeObjectURL(url);
+    }
+
+    // Initialize payroll on load
+    document.addEventListener('DOMContentLoaded', () => {
+      calculatePayroll();
+      // Your existing initialization code...
+    });
+  </script>
+</body>
+</html>

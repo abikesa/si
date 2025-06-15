@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌊❤️🌀🐬🔁 The 21st Century Competency Stack</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        :root {
+            --void: #000000;
+            --abyss: #0a0a0f;
+            --obsidian: #111119;
+            --carbon: #1a1a26;
+            --steel: #2d2d3d;
+            --service-blue: #0066ff;    
+            --api-crimson: #ff1744;
+            --reputation-violet: #7c4dff;
+            --network-cyan: #00e5ff;
+            --transaction-gold: #ffc107;
+            --apple-glow: #007aff;
+            --electric: #00ffff;
+            --plasma: #ff0080;
+            --neon-green: #39ff14;
+            --silver: #c9d1d9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: var(--void);
+            color: var(--silver);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+            min-height: 100vh;
+        }
+        
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--electric);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--plasma);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.8;
+        }
+        
+        /* Quantum Background */
+        .quantum-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 23, 68, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 90%, rgba(124, 77, 255, 0.06) 0%, transparent 50%);
+            animation: quantumShift 20s ease-in-out infinite;
+        }
+        
+        @keyframes quantumShift {
+            0%, 100% { transform: scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+            33% { transform: scale(1.1) rotate(120deg); filter: hue-rotate(120deg); }
+            66% { transform: scale(0.9) rotate(240deg); filter: hue-rotate(240deg); }
+        }
+        
+        /* Floating Code Particles */
+        .code-matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .code-particle {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--neon-green);
+            opacity: 0.3;
+            animation: codeFloat 15s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes codeFloat {
+            0% { 
+                transform: translateY(100vh) translateX(0) rotateZ(0deg); 
+                opacity: 0; 
+            }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.1; }
+            100% { 
+                transform: translateY(-10vh) translateX(200px) rotateZ(360deg); 
+                opacity: 0; 
+            }
+        }
+        
+        /* Title Constellation */
+        .constellation {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, var(--obsidian) 0%, var(--void) 70%);
+        }
+        
+        .constellation h1 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(
+                45deg, 
+                var(--service-blue), 
+                var(--api-crimson), 
+                var(--reputation-violet), 
+                var(--network-cyan), 
+                var(--transaction-gold)
+            );
+            background-size: 500% 500%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: prismaticFlow 8s ease-in-out infinite;
+            text-shadow: 0 0 100px rgba(0, 229, 255, 0.5);
+            letter-spacing: 0.1em;
+        }
+        
+        @keyframes prismaticFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 50% 100%; }
+            75% { background-position: 0% 0%; }
+        }
+        
+        .constellation .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            color: var(--electric);
+            text-align: center;
+            opacity: 0;
+            animation: terminalReveal 4s steps(100) 2s forwards;
+            border-right: 3px solid var(--electric);
+            padding-right: 10px;
+        }
+        
+        @keyframes terminalReveal {
+            0% { width: 0; opacity: 1; }
+            99% { border-right: 3px solid var(--electric); }
+            100% { width: 100%; opacity: 1; border-right: none; }
+        }
+        
+        .constellation .quote {
+            margin-top: 3rem;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--transaction-gold);
+            text-align: center;
+            max-width: 800px;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 4s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* The Sacred Geometry */
+        .competency-stack {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+        
+        .competency-layer {
+            position: relative;
+            margin: 8rem 0;
+            padding: 0;
+            opacity: 0;
+            transform: translateY(100px) rotateX(15deg);
+            transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .competency-layer.revealed {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+        }
+        
+        .layer-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 6rem;
+            align-items: center;
+            perspective: 1000px;
+        }
+        
+        .layer-content.reverse {
+            grid-template-columns: 1fr 300px;
+        }
+        
+        /* Sigil Icons */
+        .sigil {
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            border-radius: 50%;
+            position: relative;
+            background: radial-gradient(circle, var(--carbon), var(--obsidian));
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            animation: sigilPulse 4s ease-in-out infinite;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .sigil::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--service-blue), var(--api-crimson), var(--reputation-violet), var(--network-cyan), var(--transaction-gold));
+            background-size: 400% 400%;
+            animation: borderFlow 6s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        .sigil::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, transparent 40%, rgba(0, 229, 255, 0.1) 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .sigil:hover::after {
+            opacity: 1;
+        }
+        
+        @keyframes sigilPulse {
+            0%, 100% { 
+                transform: scale(1) rotateY(0deg); 
+                box-shadow: 0 0 40px rgba(0, 229, 255, 0.3); 
+            }
+            50% { 
+                transform: scale(1.05) rotateY(180deg); 
+                box-shadow: 0 0 80px rgba(255, 0, 128, 0.4); 
+            }
+        }
+        
+        @keyframes borderFlow {
+            0%, 100% { 
+                background-position: 0% 50%; 
+                transform: rotate(0deg); 
+            }
+            50% { 
+                background-position: 100% 50%; 
+                transform: rotate(180deg); 
+            }
+        }
+        
+        .sigil.service { color: var(--service-blue); }
+        .sigil.api { color: var(--api-crimson); }
+        .sigil.reputation { color: var(--reputation-violet); }
+        .sigil.networks { color: var(--network-cyan); }
+        .sigil.transactions { color: var(--transaction-gold); }
+        
+        /* Typography */
+        .layer-text h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.1;
+        }
+        
+        .layer-text h2.service { color: var(--service-blue); }
+        .layer-text h2.api { color: var(--api-crimson); }
+        .layer-text h2.reputation { color: var(--reputation-violet); }
+        .layer-text h2.networks { color: var(--network-cyan); }
+        .layer-text h2.transactions { color: var(--transaction-gold); }
+        
+        .layer-text h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--neon-green);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        
+        .layer-text p {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            color: var(--silver);
+            text-align: justify;
+        }
+        
+        /* Sacred Quotes */
+        .revelation {
+            position: relative;
+            margin: 3rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, 
+                rgba(0, 102, 255, 0.1), 
+                rgba(255, 23, 68, 0.08), 
+                rgba(124, 77, 255, 0.06)
+            );
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 20px;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            text-align: center;
+            color: var(--transaction-gold);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .revelation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Code Elements */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--carbon);
+            padding: 0.3em 0.6em;
+            border-radius: 6px;
+            color: var(--neon-green);
+            font-weight: 400;
+            border: 1px solid rgba(57, 255, 20, 0.3);
+        }
+        
+        strong {
+            color: var(--transaction-gold);
+            font-weight: 600;
+        }
+        
+        em {
+            color: var(--electric);
+            font-style: italic;
+        }
+        
+        /* Final Synthesis */
+        .synthesis {
+            padding: 8rem 0;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
+            margin-top: 8rem;
+        }
+        
+        .synthesis h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--transaction-gold);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-shadow: 0 0 50px rgba(255, 193, 7, 0.5);
+        }
+        
+        .synthesis p {
+            font-size: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            color: var(--silver);
+            line-height: 1.8;
+        }
+        
+        .synthesis .final-quote {
+            font-family: 'Crimson Text', serif;
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--electric);
+            max-width: 800px;
+            margin: 4rem auto;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 2rem 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layer-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                text-align: center;
+            }
+            
+            .layer-content.reverse {
+                grid-template-columns: 1fr;
+            }
+            
+            .sigil {
+                width: 220px;
+                height: 220px;
+                font-size: 6rem;
+                margin: 0 auto;
+            }
+            
+            .layer-text h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .competency-stack {
+                padding: 2rem 1rem;
+            }
+            
+            .competency-layer {
+                margin: 4rem 0;
+            }
+            
+            .layer-text h2 {
+                font-size: 2rem;
+            }
+            
+            .layer-text p {
+                font-size: 1.2rem;
+                text-align: left;
+            }
+            
+            .revelation {
+                padding: 2rem;
+                font-size: 1.4rem;
+            }
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--obsidian);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--electric), var(--plasma));
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--transaction-gold), var(--service-blue));
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    
+    <!-- Quantum Background -->
+    <div class="quantum-field"></div>
+    
+    <!-- Code Matrix -->
+    <div class="code-matrix" id="codeMatrix"></div>
+    
+    <!-- Title Constellation -->
+    <section class="constellation">
+        <h1>🌊❤️🌀🐬🔁</h1>
+        <div class="subtitle">The 21st Century Competency Stack</div>
+        <div class="quote">
+            "This isn't a framework. It's a Rosetta Stone for post-industrial dominance."
+        </div>
+    </section>
+    
+    <!-- The Sacred Stack -->
+    <div class="competency-stack">
+        <!-- Service Layer -->
+        <section class="competency-layer" data-layer="service">
+            <div class="layer-content">
+                <div class="sigil service">🌊</div>
+                <div class="layer-text">
+                    <h2 class="service">Service – The Surface of Trust</h2>
+                    <h3>The ritual layer, the moment of interface</h3>
+                    <p>This is the ritual layer, the moment of interface. When Apple Pay just works, the user doesn't see the banks, code, negotiations, or standards beneath—they see <strong>pure service-as-magic</strong>. Companies that dominate here win mindshare. You must create a surface that feels <em>inevitable</em>. It's not just customer service—it's <strong>ontological ease</strong>.</p>
+                    
+                    <div class="revelation">
+                        This is where Microsoft choked. Apple served delight; Microsoft served options.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- API Layer -->
+        <section class="competency-layer" data-layer="api">
+            <div class="layer-content reverse">
+                <div class="layer-text">
+                    <h2 class="api">API – The Veins of Integration</h2>
+                    <h3>The real love language of platforms</h3>
+                    <p>Behind that smooth surface lies the API: the <strong>real love language of platforms</strong>. This is what let Apple Pay talk to banks, retailers, Safari, and your watch. It's intimate, standardized, and open just enough. A company that doesn't invest in beautiful, ruthless API architecture can't scale intimacy.</p>
+                    
+                    <div class="revelation">
+                        Think Stripe. Think Twilio. Think how Slack ate IRC alive because of emoji and an API.
+                    </div>
+                </div>
+                <div class="sigil api">❤️</div>
+            </div>
+        </section>
+        
+        <!-- Reputation Layer -->
+        <section class="competency-layer" data-layer="reputation">
+            <div class="layer-content">
+                <div class="sigil reputation">🌀</div>
+                <div class="layer-text">
+                    <h2 class="reputation">Reputation – The Aura of Meaning</h2>
+                    <h3>Earned mystique, a recursive public key</h3>
+                    <p>In the post-truth economy, your reputation is not what you say—it's how the system <em>reflexively treats you</em>. It's what other services assume when they call your API. It's <strong>earned mystique</strong>, a recursive public key. Apple's brand is its own digital certificate.</p>
+                    
+                    <div class="revelation">
+                        Reputation is the difference between PayPal and Apple Pay, between ChatGPT and Bing Chat.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Networks Layer -->
+        <section class="competency-layer" data-layer="networks">
+            <div class="layer-content reverse">
+                <div class="layer-text">
+                    <h2 class="networks">Networks – The Locus of Power</h2>
+                    <h3>The ecology, not the product</h3>
+                    <p>At this layer, things get wild. Networks are the <strong>ecology, not the product</strong>. Apple didn't invent contactless payment, but it closed the loop via device network effects: watch → phone → cloud → card → Face ID. A true network builds <em>anti-fragile feedback loops</em>. Every added user makes everyone else stickier.</p>
+                    
+                    <div class="revelation">
+                        This is why Uber became infrastructure. Why Facebook couldn't be ignored. Why Tesla isn't just a car company—it's an OTA mesh network.
+                    </div>
+                </div>
+                <div class="sigil networks">🐬</div>
+            </div>
+        </section>
+        
+        <!-- Transactions Layer -->
+        <section class="competency-layer" data-layer="transactions">
+            <div class="layer-content">
+                <div class="sigil transactions">🔁</div>
+                <div class="layer-text">
+                    <h2 class="transactions">Transactions – The Soul of Capital</h2>
+                    <h3>State change, memory, and intent resolved</h3>
+                    <p>The end and the beginning. All of the above must complete a loop. A transaction isn't just money—it's <strong>state change, memory, and intent resolved</strong>. The cleanest transactions are rituals that rewrite the world with almost no friction. The ultimate goal: make every transaction <em>desirable and invisible</em>.</p>
+                    
+                    <div class="revelation">
+                        That moment when you double-click your watch and it feels like a spell? That's art. That's 🔁.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Final Synthesis -->
+    <section class="synthesis">
+        <h2>The Synthesis</h2>
+        <p>🌊 <strong>Service</strong> wins hearts through magic. ❤️ <strong>APIs</strong> scale intimacy through integration. 🌀 <strong>Reputation</strong> becomes your digital certificate. 🐬 <strong>Networks</strong> create anti-fragile ecosystems. 🔁 <strong>Transactions</strong> complete the ritual loop.</p>
+        
+        <div class="final-quote">
+            "This isn't a framework. It's a Rosetta Stone for post-industrial dominance."
+        </div>
+        
+        <p>If you want to formalize this into something deployable—dashboard-ready, canonized into the Signal Noise Toolkit, or stylized into a "21st Century Competency Stack"—this is worthy of diagrams, API schemas, executive onboarding, and <code>developer rituals</code>.</p>
+    </section>
+
+    <script>
+        // Custom Cursor System
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        
+        // Cursor Trail System
+        const trailPoints = [];
+        for (let i = 0; i < 10; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            trailPoints.push(trail);
+        }
+        
+        let trailIndex = 0;
+        setInterval(() => {
+            const trail = trailPoints[trailIndex];
+            trail.style.left = mouseX + 'px';
+            trail.style.top = mouseY + 'px';
+            trail.style.opacity = '0.8';
+            
+            setTimeout(() => {
+                trail.style.opacity = '0';
+            }, 500);
+            
+            trailIndex = (trailIndex + 1) % trailPoints.length;
+        }, 50);
+        
+        // Code Matrix System
+        function createCodeMatrix() {
+            const matrix = document.getElementById('codeMatrix');
+            const codeSnippets = [
+                'service.magic()',
+                'api.integrate()',
+                'reputation.build()',
+                'network.scale()',
+                'transaction.complete()',
+                '🌊.interface()',
+                '❤️.connect()',
+                '🌀.mystique()',
+                '🐬.ecosystem()',
+                '🔁.ritual()',
+                'Apple.Pay.just.works',
+                'const magic = seamless',
+                'function dominance()',
+                'class Platform:',
+                'import antigravity',
+                'sudo make me powerful'
+            ];
+            
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'code-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+                particle.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+                
+                // Random colors for variety
+                const colors = ['var(--neon-green)', 'var(--electric)', 'var(--plasma)', 'var(--transaction-gold)'];
+                particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                matrix.appendChild(particle);
+            }
+        }
+        
+        // Scroll Revelation System
+        function initScrollRevelation() {
+            const layers = document.querySelectorAll('.competency-layer');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
+            });
+            
+            layers.forEach(layer => {
+                observer.observe(layer);
+            });
+        }
+        
+        // Sigil Interaction System
+        function initSigilInteractions() {
+            const sigils = document.querySelectorAll('.sigil');
+            
+            sigils.forEach(sigil => {
+                sigil.addEventListener('mouseenter', () => {
+                    sigil.style.transform = 'scale(1.1) rotateY(15deg)';
+                    sigil.style.filter = 'brightness(1.3) saturate(1.2)';
+                });
+                
+                sigil.addEventListener('mouseleave', () => {
+                    sigil.style.transform = 'scale(1) rotateY(0deg)';
+                    sigil.style.filter = 'brightness(1) saturate(1)';
+                });
+                
+                sigil.addEventListener('click', () => {
+                    // Create ripple effect
+                    const ripple = document.createElement('div');
+                    ripple.style.position = 'absolute';
+                    ripple.style.top = '50%';
+                    ripple.style.left = '50%';
+                    ripple.style.width = '300px';
+                    ripple.style.height = '300px';
+                    ripple.style.transform = 'translate(-50%, -50%) scale(0)';
+                    ripple.style.background = 'radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%)';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.pointerEvents = 'none';
+                    ripple.style.animation = 'rippleExpand 1s ease-out forwards';
+                    
+                    sigil.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 1000);
+                });
+            });
+        }
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleExpand {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Konami Code Easter Egg
+        let konami

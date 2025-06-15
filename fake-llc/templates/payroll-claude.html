@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ukubona Inc — Signal Noise Simulation Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0f1c;
+      color: #fff;
+    }
+    .task-card, .payroll-card {
+      background-color: #1a1f2c;
+      border-left: 4px solid #00d1b2;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      position: relative;
+    }
+    .task-card:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -1.5rem;
+      left: 0;
+      background: #333;
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+    .is-overdue { border-color: #ff3860 !important; }
+    .is-due-today { border-color: #ffdd57 !important; }
+    .is-upcoming { border-color: #23d160 !important; }
+    .is-payroll { border-color: #9b59b6 !important; }
+    .timeline-bar {
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .timeline-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff3860, #ffdd57, #23d160);
+      transition: width 0.3s ease;
+      animation: pulse 5s infinite linear;
+    }
+    @keyframes pulse {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.4); }
+      100% { filter: brightness(1); }
+    }
+    input[type="text"], input[type="date"], select {
+      background: #0f1626;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 0.5rem;
+      margin: 0.25rem 0;
+    }
+    .buttons {
+      margin-bottom: 1rem;
+    }
+    .selectors {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .payroll-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .payroll-item {
+      background: #2c3e50;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+    .payroll-item .value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00d1b2;
+    }
+    .payroll-item .label {
+      font-size: 0.875rem;
+      color: #bdc3c7;
+      margin-top: 0.25rem;
+    }
+    .mode-tabs {
+      margin-bottom: 1rem;
+    }
+    .mode-tabs .tabs {
+      border-bottom: 1px solid #444;
+    }
+    .mode-tabs .tabs a {
+      color: #bdc3c7;
+      border-bottom: 2px solid transparent;
+    }
+    .mode-tabs .tabs .is-active a {
+      color: #00d1b2;
+      border-bottom-color: #00d1b2;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-white">📊 Ukubona Inc — Simulation Dashboard</h1>
+
+      <!-- Mode Selection -->
+      <div class="mode-tabs">
+        <div class="tabs">
+          <ul>
+            <li class="is-active" id="tab-tasks">
+              <a onclick="switchMode('tasks')">📋 Tasks</a>
+            </li>
+            <li id="tab-payroll">
+              <a onclick="switchMode('payroll')">💰 Payroll</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tasks Mode -->
+      <div id="tasks-mode">
+        <div class="selectors">
+          <div class="select">
+            <select id="roleSelect"></select>
+          </div>
+          <div class="select">
+            <select id="scopeSelect">
+              <option value="Tactical">Tactical</option>
+              <option value="Informational">Informational</option>
+              <option value="Strategic">Strategic</option>
+              <option value="Operational">Operational</option>
+              <option value="Existential">Existential</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button class="button is-link" onclick="exportCSV()">Export CSV</button>
+          <button class="button is-warning" onclick="document.getElementById('csvInput').click()">Import CSV</button>
+          <button class="button is-info" onclick="exportAllJSON()">Export JSON</button>
+          <input type="file" id="csvInput" accept=".csv" style="display: none;">
+        </div>
+      </div>
+
+      <!-- Payroll Mode -->
+      <div id="payroll-mode" style="display: none;">
+        <div class="selectors">
+          <div class="select">
+            <select id="employeeSelect">
+              <option value="">Select Employee...</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="label has-text-white">Start Date:</label>
+            <input type="date" id="startDate" value="2025-03-31">
+          </div>
+          <div class="field">
+            <label class="label has-text-white">End Date:</label>
+            <input type="date" id="endDate" value="2025-06-14">
+          </div>
+          <button class="button is-primary" onclick="calculatePayroll()">Calculate</button>
+          <button class="button is-success" onclick="exportPayrollCSV()" id="exportPayrollBtn" disabled>Export CSV</button>
+        </div>
+      </div>
+
+      <div id="dashboard"></div>
+    </div>
+  </section>
+
+  <script>
+    const QUOTES = [
+      "Trust the tension.",
+      "Urgency is a signal.",
+      "The stack reveals the self.",
+      "Silence is strategic.",
+      "Signals love constraints."
+    ];
+
+    let mockData = JSON.parse(localStorage.getItem("dashboardData")) || {
+      "CEO": {
+        Tactical: [
+          { name: "Lebo", id: "C1", task: "Review investor deck", due: "2025-06-07" }
+        ],
+        Existential: [
+          { name: "Lebo", id: "C2", task: "Annual retreat planning", due: "2025-12-15" }
+        ]
+      },
+      "Intern": {
+        Tactical: [
+          { name: "Thandi", id: "I1", task: "Daily standup notes", due: "2025-06-07" }
+        ],
+        Strategic: [
+          { name: "Thandi", id: "I2", task: "Q3 onboarding draft", due: "2025-06-30" }
+        ]
+      },
+      "Engineer": {
+        Operational: [
+          { name: "Kabelo", id: "E1", task: "Patch security hole", due: "2025-06-09" },
+          { name: "Kabelo", id: "E2", task: "Rework auth flow", due: "2025-06-13" }
+        ]
+      }
+    };
+
+    let currentMode = 'tasks';
+    let currentPayrollData = null;
+
+    const roleSelect = document.getElementById('roleSelect');
+    const scopeSelect = document.getElementById('scopeSelect');
+    const employeeSelect = document.getElementById('employeeSelect');
+    const dashboard = document.getElementById('dashboard');
+
+    // Initialize app
+    function init() {
+      initSelectors();
+      loadEmployees();
+      roleSelect.value = Object.keys(mockData)[0];
+      scopeSelect.value = "Tactical";
+      renderDashboard();
+    }
+
+    function switchMode(mode) {
+      currentMode = mode;
+      
+      // Update tabs
+      document.getElementById('tab-tasks').classList.toggle('is-active', mode === 'tasks');
+      document.getElementById('tab-payroll').classList.toggle('is-active', mode === 'payroll');
+      
+      // Show/hide sections
+      document.getElementById('tasks-mode').style.display = mode === 'tasks' ? 'block' : 'none';
+      document.getElementById('payroll-mode').style.display = mode === 'payroll' ? 'block' : 'none';
+      
+      renderDashboard();
+    }
+
+    function initSelectors() {
+      roleSelect.innerHTML = '';
+      Object.keys(mockData).forEach(role => {
+        const opt = document.createElement('option');
+        opt.value = role;
+        opt.textContent = role;
+        roleSelect.appendChild(opt);
+      });
+    }
+
+    async function loadEmployees() {
+      try {
+        const response = await fetch('/api/employees');
+        const employees = await response.json();
+        
+        employeeSelect.innerHTML = '<option value="">Select Employee...</option>';
+        employees.forEach(emp => {
+          const opt = document.createElement('option');
+          opt.value = emp.id;
+          opt.textContent = `${emp.name} (${emp.id})`;
+          employeeSelect.appendChild(opt);
+        });
+      } catch (error) {
+        console.error('Failed to load employees:', error);
+      }
+    }
+
+    async function calculatePayroll() {
+      const employeeId = employeeSelect.value;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      
+      if (!employeeId) {
+        alert('Please select an employee');
+        return;
+      }
+      
+      try {
+        const response = await fetch(`/api/payroll/${employeeId}?start_date=${startDate}&end_date=${endDate}`);
+        currentPayrollData = await response.json();
+        
+        if (currentPayrollData.error) {
+          alert(currentPayrollData.error);
+          return;
+        }
+        
+        document.getElementById('exportPayrollBtn').disabled = false;
+        renderPayrollDashboard();
+      } catch (error) {
+        console.error('Failed to calculate payroll:', error);
+        alert('Failed to calculate payroll');
+      }
+    }
+
+    function renderPayrollDashboard() {
+      if (!currentPayrollData) return;
+      
+      const data = currentPayrollData;
+      dashboard.innerHTML = `
+        <div class="payroll-card is-payroll">
+          <h3 class="title is-4 has-text-white">${data.employee_name} (${data.employee_id})</h3>
+          <p class="subtitle is-6 has-text-grey">
+            Pay Period: ${data.period_start} to ${data.period_end} 
+            (${data.weeks_worked} weeks)
+          </p>
+          
+          <div class="payroll-summary">
+            <div class="payroll-item">
+              <div class="value">$${data.gross_pay.toFixed(2)}</div>
+              <div class="label">Gross Pay</div>
+            </div>
+            <div class="payroll-item">
+              <div class="value">$${data.federal_tax.toFixed(2)}</div>
+              <div class="label">Federal Tax</div>
+            </div>
+            <div class="payroll-item">
+              <div class="value">$${data.state_tax.toFixed(2)}</div>
+              <div class="label">State Tax (MD)</div>
+            </div>
+            <div class="payroll-item">
+              <div class="value">$${data.social_security.toFixed(2)}</div>
+              <div class="label">Social Security</div>
+            </div>
+            <div class="payroll-item">
+              <div class="value">$${data.medicare.toFixed(2)}</div>
+              <div class="label">Medicare</div>
+            </div>
+            <div class="payroll-item">
+              <div class="value" style="color: #27ae60;">$${data.net_pay.toFixed(2)}</div>
+              <div class="label">Net Pay</div>
+            </div>
+          </div>
+          
+          <div style="margin-top: 1rem; font-size: 0.875rem; color: #bdc3c7;">
+            <p>Rate: $${data.hourly_rate}/hr × ${data.weekly_hours} hrs/week</p>
+            <p>Filing Status: ${data.filing_status.replace('_', ' ')}</p>
+            <p>Total Deductions: $${data.total_deductions.toFixed(2)}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function exportPayrollCSV() {
+      if (!currentPayrollData) return;
+      
+      const employeeId = currentPayrollData.employee_id;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      
+      window.open(`/api/payroll/${employeeId}/csv?start_date=${startDate}&end_date=${endDate}`);
+    }
+
+    roleSelect.addEventListener('change', renderDashboard);
+    scopeSelect.addEventListener('change', renderDashboard);
+
+    function getStatusClass(dueDateStr) {
+      const today = new Date();
+      const due = new Date(dueDateStr);
+      const diff = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+      if (diff < 0) return 'is-overdue';
+      if (diff === 0) return 'is-due-today';
+      return 'is-upcoming';
+    }
+
+    function renderDashboard() {
+      if (currentMode === 'payroll') {
+        if (currentPayrollData) {
+          renderPayrollDashboard();
+        } else {
+          dashboard.innerHTML = '<p class="has-text-grey">Select an employee and calculate payroll to see results.</p>';
+        }
+        return;
+      }
+      
+      const role = roleSelect.value;
+      const scope = scopeSelect.value;
+      const tasks = (mockData[role] && mockData[role][scope]) || [];
+      dashboard.innerHTML = '';
+      
+      tasks.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = `task-card ${getStatusClass(item.due)}`;
+        card.setAttribute('data-tooltip', QUOTES[(index + role.length + scope.length) % QUOTES.length]);
+
+        card.innerHTML = `
+          <input type="text" value="${item.name}" onchange="updateTask('${role}','${scope}', ${index}, 'name', this.value)">
+          <input type="text" value="${item.id}" onchange="updateTask('${role}','${scope}', ${index}, 'id', this.value)">
+          <input type="text" value="${item.task}" onchange="updateTask('${role}','${scope}', ${index}, 'task', this.value)">
+          <input type="date" value="${item.due}" onchange="updateTask('${role}','${scope}', ${index}, 'due', this.value)">
+          <div class="timeline-bar"><div class="timeline-fill" id="fill-${role}-${scope}-${index}"></div></div>
+        `;
+        dashboard.appendChild(card);
+
+        const fill = document.getElementById(`fill-${role}-${scope}-${index}`);
+        const today = new Date();
+        const dueDate = new Date(item.due);
+        const daysDiff = (dueDate - today) / (1000 * 60 * 60 * 24);
+        const percent = Math.max(0, Math.min(100, 100 - daysDiff * 10));
+        fill.style.width = percent + '%';
+      });
+      localStorage.setItem("dashboardData", JSON.stringify(mockData));
+    }
+
+    function updateTask(role, scope, index, key, value) {
+      mockData[role][scope][index][key] = value;
+      if (key === 'due') renderDashboard();
+      localStorage.setItem("dashboardData", JSON.stringify(mockData));
+    }
+
+    function exportCSV() {
+      const role = roleSelect.value;
+      const scope = scopeSelect.value;
+      const data = (mockData[role] && mockData[role][scope]) || [];
+      const rows = data.map(item => `${item.name},${item.id},${item.task},${item.due}`);
+      const csv = ['name,id,task,due', ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${role}_${scope}_tasks.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('csvInput').addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const lines = e.target.result.trim().split('\n');
+        const [header, ...rows] = lines;
+        const data = rows.map(line => {
+          const [name, id, task, due] = line.split(',');
+          return { name, id, task, due };
+        });
+        const role = roleSelect.value;
+        const scope = scopeSelect.value;
+        mockData[role] = mockData[role] || {};
+        mockData[role][scope] = data;
+        renderDashboard();
+      };
+      reader.readAsText(file);
+    });
+
+    function exportAllJSON() {
+      const json = JSON.stringify(mockData, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ukubona_dashboard_data.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Initialize on page load
+    init();
+  </script>
+</body>
+</html>

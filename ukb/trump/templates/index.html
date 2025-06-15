@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Signal Noise Toolkit — Spiral Cosmogram</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <h1>Signal Noise Toolkit — Spiral Cosmogram</h1>
+    <ul>
+        {% for layer in layers %}
+            <li>
+                <strong>{{ layer.name }}</strong>: {{ layer.description }}
+                {% if layer.notes %}
+                    <ul>
+                        <li><em>Cognitive Status:</em> {{ layer.notes.cognitive_status }}</li>
+                        <li><em>Key Traits:</em>
+                            <ul>
+                            {% for trait in layer.notes.key_traits %}
+                                <li>{{ trait }}</li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                        <li><em>Implications:</em>
+                            <ul>
+                            {% for imp in layer.notes.implications %}
+                                <li>{{ imp }}</li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                        <li><em>Contrast with Toolkit:</em>
+                            <ul>
+                            {% for contrast in layer.notes.contrast_with_toolkit %}
+                                <li>{{ contrast }}</li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

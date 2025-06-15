@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ubuntu Loop</title>
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: Georgia, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #ffd;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #ffd700;
+      color: #000;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .spiral {
+      position: relative;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+    }
+    .stage {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .stage.highlight {
+      transform: scale(1.25);
+      box-shadow: 0 0 30px 10px #ffd700;
+      z-index: 10;
+    }
+    .one   { top: 5%;  left: 35%; background: #045; }
+    .two   { top: 25%; left: 70%; background: #500; }
+    .three { top: 60%; left: 65%; background: #550055; }
+    .four  { top: 75%; left: 20%; background: #006655; }
+    .five  { top: 35%; left: -5%; background: #444400; }
+    #output {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      max-width: 400px;
+      text-align: center;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 Ubuntu Fractal Loop</h1>
+
+  <input id="userInput" type="text" placeholder="What part of your loop are you in?" />
+  <button onclick="submitInput()">Find My Stage</button>
+
+  <div class="spiral">
+    <div id="ukuvula" class="stage one">🌊<br>Ukuvula</div>
+    <div id="ukuzula" class="stage two">❤️<br>Ukuzula</div>
+    <div id="ukusoma" class="stage three">🌀<br>Ukusoma</div>
+    <div id="ukubona" class="stage four">🐬<br>Ukubona</div>
+    <div id="ukuvela" class="stage five">🔁<br>Ukuvela</div>
+  </div>
+
+  <div id="output">You haven’t submitted anything yet.</div>
+
+  <script>
+    async function submitInput() {
+      const input = document.getElementById('userInput').value;
+      const response = await fetch('/stage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ input })
+      });
+      const data = await response.json();
+
+      // Clear highlights
+      document.querySelectorAll('.stage').forEach(el => el.classList.remove('highlight'));
+
+      if (data.stage !== "unknown") {
+        const stageEl = document.getElementById(data.stage);
+        if (stageEl) stageEl.classList.add('highlight');
+        document.getElementById('output').innerText = `${data.emoji} ${data.description}`;
+      } else {
+        document.getElementById('output').innerText = "❓ Could not determine your stage.";
+      }
+    }
+  </script>
+</body>
+</html>
+

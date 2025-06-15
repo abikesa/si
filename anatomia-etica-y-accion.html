@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signal/Noise Ethical Stack</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #0c0c0c;
+      color: #f0f0f0;
+      padding: 2em;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #ff66cc;
+      font-size: 2em;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.3em;
+    }
+
+    .layer {
+      margin-bottom: 2em;
+    }
+
+    .symbol {
+      font-size: 1.5em;
+      margin-right: 0.5em;
+    }
+
+    .tooltip {
+      position: relative;
+      cursor: help;
+      border-bottom: 1px dotted #888;
+      color: #ffb3ff;
+    }
+
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #222;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      font-size: 0.85em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .tooltip:hover::after {
+      opacity: 1;
+    }
+
+    .label {
+      color: #66faff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧠 Signal/Noise Ethical Stack</h1>
+
+  <div class="layer">
+    <span class="symbol">🌊</span>
+    <span class="label">¿Qué?</span> — Bone 🦴<br>
+    The raw fact of existence. Foundational. Unreflective. Just structure.
+  </div>
+
+  <div class="layer">
+    <span class="symbol">❤️</span>
+    <span class="label">Sensación</span> — Joints ⚙️<br>
+    Affective bridges. Feeling through contact. Where relation begins.
+  </div>
+
+  <div class="layer">
+    <span class="symbol">🌀</span>
+    <span class="label">¿Cómo?</span> — Muscle 💪🏾<br>
+    Mechanism and movement. Repetition. Expression of will.
+  </div>
+
+  <div class="layer">
+    <span class="symbol">🐬</span>
+    <span class="label">Percepción</span> — Neurons ⚡️<br>
+    Interpretation without judgment. Signal integration. Reflex and rhythm.
+  </div>
+
+  <div class="layer">
+    <span class="symbol">🔁</span>
+    <span class="tooltip label" data-tooltip="Posture is the last thing we control — and the first thing others see.">
+      ¿Por qué?
+    </span> — Postur(e)-ing 🎭<br>
+    Final synthesis. Meaning and appearance. The ethics of how you’re seen.
+  </div>
+
+</body>
+</html>
+

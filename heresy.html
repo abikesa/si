@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heretical Catechism: A Theological Map of Version Control</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Code+Pro:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        :root {
+            --void: #000000;
+            --obsidian: #0d1117;
+            --charcoal: #161b22;
+            --steel: #21262d;
+            --ember: #ff6b35;
+            --gold: #ffd700;
+            --silver: #c9d1d9;
+            --crimson: #dc143c;
+            --electric: #58a6ff;
+            --neon-green: #39ff14;
+            --terminal-green: #00ff41;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--void);
+            color: var(--silver);
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        /* Matrix Rain Background */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 14px;
+            color: var(--terminal-green);
+            white-space: nowrap;
+            animation: matrix-fall linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes matrix-fall {
+            to { transform: translateY(calc(100vh + 100px)); }
+        }
+        
+        /* Unholy Geometric Patterns */
+        .sacred-geometry {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 25% 25%, var(--ember) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, var(--electric) 1px, transparent 1px),
+                linear-gradient(45deg, transparent 49%, var(--gold) 49%, var(--gold) 51%, transparent 51%);
+            background-size: 60px 60px, 80px 80px, 40px 40px;
+            animation: geometryShift 30s ease-in-out infinite;
+        }
+        
+        @keyframes geometryShift {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+        }
+        
+        /* Title Sequence - Biblical Majesty */
+        .revelation {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, var(--obsidian) 0%, var(--void) 70%);
+        }
+        
+        .revelation h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 6vw, 5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            background: linear-gradient(45deg, var(--ember), var(--gold), var(--crimson), var(--electric));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heretical-glow 4s ease-in-out infinite, title-emerge 2s ease-out;
+            text-shadow: 0 0 50px rgba(255, 107, 53, 0.5);
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes heretical-glow {
+            0%, 100% { background-position: 0% 50%; filter: brightness(1); }
+            50% { background-position: 100% 50%; filter: brightness(1.5) saturate(1.2); }
+        }
+        
+        @keyframes title-emerge {
+            0% { opacity: 0; transform: scale(0.8) rotateX(90deg); }
+            100% { opacity: 1; transform: scale(1) rotateX(0deg); }
+        }
+        
+        .revelation .subtitle {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.2rem;
+            color: var(--terminal-green);
+            text-align: center;
+            opacity: 0;
+            animation: terminal-type 3s steps(50) 1s forwards;
+            border-right: 2px solid var(--terminal-green);
+        }
+        
+        @keyframes terminal-type {
+            0% { width: 0; opacity: 1; }
+            99% { border-right: 2px solid var(--terminal-green); }
+            100% { width: 100%; opacity: 1; border-right: none; }
+        }
+        
+        /* Catechism Sections */
+        .catechism {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .doctrine {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 4rem 0;
+        }
+        
+        .doctrine-content {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        /* Git Command Styling */
+        .git-icon {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--charcoal), var(--obsidian));
+            box-shadow: 
+                0 0 50px rgba(255, 107, 53, 0.3),
+                inset 0 0 50px rgba(0, 0, 0, 0.5);
+            animation: icon-pulse 3s ease-in-out infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes icon-pulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 50px rgba(255, 107, 53, 0.3); 
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 0 80px rgba(255, 107, 53, 0.6); 
+            }
+        }
+        
+        .fork-icon { color: var(--ember); }
+        .branch-icon { color: var(--electric); }
+        .merge-icon { color: var(--gold); }
+        
+        /* Typography Hierarchy */
+        .doctrine h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+        
+        .doctrine h2.fork { color: var(--ember); }
+        .doctrine h2.branch { color: var(--electric); }
+        .doctrine h2.merge { color: var(--gold); }
+        
+        .doctrine h3 {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.1rem;
+            color: var(--terminal-green);
+            margin-bottom: 2rem;
+            text-transform: lowercase;
+            opacity: 0.8;
+        }
+        
+        .doctrine p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        
+        /* Sacred Quotes */
+        .sacred-quote {
+            position: relative;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(88, 166, 255, 0.1));
+            border-left: 4px solid var(--ember);
+            border-radius: 0 12px 12px 0;
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            text-align: center;
+            color: var(--gold);
+        }
+        
+        .sacred-quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 6rem;
+            color: var(--ember);
+            opacity: 0.3;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .sacred-quote::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            pointer-events: none;
+            animation: quote-shimmer 4s ease-in-out infinite;
+        }
+        
+        @keyframes quote-shimmer {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        /* Scroll-triggered animations */
+        .doctrine {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1s ease-out;
+        }
+        
+        .doctrine.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Code emphasis */
+        code, .code {
+            font-family: 'Source Code Pro', monospace;
+            background: var(--charcoal);
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            color: var(--terminal-green);
+            font-weight: 600;
+        }
+        
+        strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        em {
+            color: var(--electric);
+            font-style: italic;
+        }
+        
+        /* Unholy Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--obsidian);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--ember), var(--gold));
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--gold), var(--electric));
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .doctrine-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .git-icon {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+            
+            .doctrine h2 {
+                font-size: 2rem;
+            }
+            
+            .doctrine p {
+                font-size: 1.1rem;
+                text-align: left;
+            }
+        }
+        
+        /* Final Revelation */
+        .final-theorem {
+            padding: 6rem 0;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+        }
+        
+        .final-theorem h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+        }
+        
+        .final-theorem p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--silver);
+        }
+        
+        /* Particle System */
+        .particle-system {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: particle-float 15s linear infinite;
+        }
+        
+        @keyframes particle-float {
+            0% { 
+                transform: translateY(100vh) translateX(0) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-10vh) translateX(100px) rotate(360deg); 
+                opacity: 0; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Background -->
+    <div class="matrix-bg" id="matrix"></div>
+    
+    <!-- Sacred Geometry -->
+    <div class="sacred-geometry"></div>
+    
+    <!-- Particle System -->
+    <div class="particle-system" id="particles"></div>
+    
+    <!-- Title Revelation -->
+    <section class="revelation">
+        <h1>Heretical Catechism</h1>
+        <div class="subtitle">A Theological Map of Version Control</div>
+    </section>
+    
+    <!-- The Catechism -->
+    <div class="catechism">
+        <!-- Fork: Heresy -->
+        <section class="doctrine" data-doctrine="fork">
+            <div class="doctrine-content">
+                <div class="git-icon fork-icon">
+                    ⋔
+                </div>
+                <div>
+                    <h2 class="fork">🌀 Fork: Heresy</h2>
+                    <h3>git fork --sacred-rebellion</h3>
+                    <p>A <strong>fork</strong> is heresy — not in the petty sense of error, but in the <strong>sacred, Promethean sense</strong> of <em>willful divergence</em>. You don't fork lightly. You fork because the orthodoxy can no longer contain your vision. It is a declaration that the original dogma — the parent repo — has stagnated, or worse, betrayed the signal.</p>
+                    
+                    <div class="sacred-quote">
+                        A fork is not a betrayal of truth. It is its rebirth — in exile.
+                    </div>
+                    
+                    <p>The fork is <strong>Faustian</strong>: it bears cost, demands sacrifice, and offers the fire of authorship.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Branch: Philosophy -->
+        <section class="doctrine" data-doctrine="branch">
+            <div class="doctrine-content">
+                <div>
+                    <h2 class="branch">🐬 Branch: Philosophy</h2>
+                    <h3>git branch --contemplative-mode</h3>
+                    <p>A <strong>branch</strong> is philosophy — a mode of thought, a test of a premise. It stays within the faith, explores without fracturing. To branch is to <strong>question the structure</strong> without denying its foundation. You remain loyal to the canon, but play in its margins.</p>
+                    
+                    <div class="sacred-quote">
+                        A branch asks: What if? A fork answers: Not this.
+                    </div>
+                    
+                    <p>Philosophers branch to refine. Heretics fork to rebuild.</p>
+                </div>
+                <div class="git-icon branch-icon">
+                    ⋘
+                </div>
+            </div>
+        </section>
+        
+        <!-- Merge: Liturgy -->
+        <section class="doctrine" data-doctrine="merge">
+            <div class="doctrine-content">
+                <div class="git-icon merge-icon">
+                    ⋈
+                </div>
+                <div>
+                    <h2 class="merge">🔥 Merge: Liturgy</h2>
+                    <h3>git merge --ritual-synthesis</h3>
+                    <p>When you merge, you perform <strong>ritual synthesis</strong>. It is a liturgy of reconciliation, often tense, always consequential. You bring divergent logics together — not always peacefully — and the result is a <strong>new theology of code</strong>.</p>
+                    
+                    <div class="sacred-quote">
+                        In the merge, all branches kneel before the origin.
+                    </div>
+                    
+                    <p>The merge is where <em>heretical innovations</em> are either <strong>sanctified</strong> or <strong>rejected</strong> by the collective faith.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Final Revelation -->
+        <section class="final-theorem">
+            <h2>The Sacred Trinity of Git</h2>
+            <p>In the beginning was the <code>git init</code>, and the repository was without form, and void. And the spirit of version control moved upon the face of the codebase.</p>
+            <p>Thus are the three sacred acts revealed: to <strong>Fork</strong> is to rebel with purpose, to <strong>Branch</strong> is to explore with faith, and to <strong>Merge</strong> is to synthesize with wisdom.</p>
+            <div class="sacred-quote">
+                "Not all who fork are lost. Not all who branch return unchanged. Not all merges heal."
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        function createMatrix() {
+            const matrix = document.getElementById('matrix');
+            const chars = 'git fork branch merge commit push pull clone fetch rebase cherry-pick stash log diff status add rm mv';
+            const columns = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = i * 20 + 'px';
+                column.style.animationDuration = Math.random() * 10 + 10 + 's';
+                column.style.animationDelay = Math.random() * 10 + 's';
+                
+                const text = chars.split(' ')[Math.floor(Math.random() * chars.split(' ').length)];
+                column.textContent = text;
+                
+                matrix.appendChild(column);
+            }
+        }
+        
+        // Particle System
+        function createParticles() {
+            const particleSystem = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = Math.random() * 5 + 15 + 's';
+                
+                if (i % 3 === 0) particle.style.background = 'var(--ember)';
+                if (i % 3 === 1) particle.style.background = 'var(--electric)';
+                
+                particleSystem.appendChild(particle);
+            }
+        }
+        
+        // Scroll Revelation System
+        function initScrollRevelation() {
+            const doctrines = document.querySelectorAll('.doctrine');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '0px 0px -100px 0px'
+            });
+            
+            doctrines.forEach(doctrine => {
+                observer.observe(doctrine);
+            });
+        }
+        
+        // Terminal Typing Effect
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+        
+        // Cursor Follow Effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.style.position = 'fixed';
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.width = '3px';
+            cursor.style.height = '3px';
+            cursor.style.background = 'var(--gold)';
+            cursor.style.borderRadius = '50%';
+            cursor.style.pointerEvents = 'none';
+            cursor.style.zIndex = '9999';
+            cursor.style.animation = 'particle-float 2s ease-out forwards';
+            
+            document.body.appendChild(cursor);
+            
+            setTimeout(() => {
+                cursor.remove();
+            }, 2000);
+        });
+        
+        // Initialize Everything
+        document.addEventListener('DOMContentLoaded', () => {
+            createMatrix();
+            createParticles();
+            initScrollRevelation();
+            
+            // Add some dramatic flair to git icons
+            document.querySelectorAll('.git-icon').forEach(icon => {
+                icon.addEventListener('mouseenter', () => {
+                    icon.style.transform = 'scale(1.1) rotate(5deg)';
+                    icon.style.filter = 'brightness(1.5)';
+                });
+                
+                icon.addEventListener('mouseleave', () => {
+                    icon.style.transform = 'scale(1) rotate(0deg)';
+                    icon.style.filter = 'brightness(1)';
+                });
+            });
+        });
+        
+        // Konami Code Easter Egg
+        let konamiCode = [];
+        const konamiSequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                document.body.style.filter = 'hue-rotate(180deg) saturate(2)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

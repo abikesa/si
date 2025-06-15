@@ -1,0 +1,66 @@
+layers:
+  synaptic:
+    name: Synaptic
+    color: "#8e44ad"
+    tasks:
+      - title: Refactor input parser
+        description: Update the signal preprocessor to handle malformed entries.
+        deadline: 2025-06-09
+        status: pending
+        remaining: "2 days"
+        owner: Priya Patel
+        role: Engineer
+        scope: Tactical
+
+      - title: Code review - layer merge
+        description: Review latest PR on synaptic/axonal interface.
+        deadline: 2025-06-10
+        status: pending
+        remaining: "3 days"
+        owner: Isaac Huang
+        role: Engineer
+        scope: Informational
+
+      - title: Input pipeline hotfix
+        description: Patch malformed signal handler for edge cases.
+        deadline: 2025-06-08
+        status: pending
+        remaining: "1 day"
+        owner: Priya Patel
+        role: Engineer
+        scope: Tactical
+
+      - title: Neural weight review
+        description: Calibrate parameter drift across runs.
+        deadline: 2025-06-12
+        status: pending
+        remaining: "5 days"
+        owner: Hugo Müller
+        role: ML Engineer
+        scope: Operational
+
+      - title: Integration smoke tests
+        description: Run daily battery on layered flow.
+        deadline: 2025-06-07
+        status: due today
+        remaining: "0 days"
+        owner: Liyana Shaikh
+        role: QA Lead
+        scope: Tactical
+
+  axonal:
+    name: Axonal
+    color: "#2980b9"
+    tasks:
+      - title: Weekly metrics digest
+        description: Generate and send performance metrics to strategy team.
+        deadline: 2025-06-07
+        status: due today
+        remaining: "0 days"
+        owner: Fatima Khaled
+        role: Analyst
+        scope: Informational
+
+      - title: Client model audit
+        description: Validate forecast results from client B.
+# flick 20250613013328-tBPx

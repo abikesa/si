@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Paystub Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>💰 Paystub Generator</h1>
+  
+  <div id="paystub-info">
+    <div class="employee-info">
+      <h2>Employee: <span id="employee-name">UKB-8160</span></h2>
+      <div>Pay Date: <span id="pay-date"></span></div>
+    </div>
+    
+    <table id="paystub-table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Gross Pay</td>
+          <td id="gross-pay">$0.00</td>
+        </tr>
+        <tr>
+          <td>Federal Tax</td>
+          <td id="federal-tax">$0.00</td>
+        </tr>
+        <tr>
+          <td>Social Security</td>
+          <td id="ss-tax">$0.00</td>
+        </tr>
+        <tr>
+          <td>Medicare</td>
+          <td id="medicare">$0.00</td>
+        </tr>
+        <tr>
+          <td>State Tax (MD)</td>
+          <td id="state-tax">$0.00</td>
+        </tr>
+        <tr class="net-pay">
+          <td><strong>Net Pay</strong></td>
+          <td id="net-pay"><strong>$0.00</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="calculation-details">
+      <h3>Calculation Details</h3>
+      <p>Hourly Rate: $<span id="hourly-rate">25.00</span></p>
+      <p>Weekly Hours: <span id="weekly-hours">23</span></p>
+      <p>Pay Period: <span id="pay-period"></span></p>
+    </div>
+  </div>
+</body>
+</html>

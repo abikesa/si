@@ -1,0 +1,60 @@
+body {
+  font-family: sans-serif;
+  background: #121212;
+  color: #eee;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1, h2, h3 {
+  color: #ffeb3b;
+}
+
+#paystub-info {
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.employee-info {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444;
+}
+
+#paystub-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+#paystub-table th, 
+#paystub-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+#paystub-table th {
+  background: #333;
+}
+
+.net-pay {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.net-pay td {
+  border-top: 2px solid #444;
+  border-bottom: none !important;
+}
+
+.calculation-details {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #444;
+  font-size: 0.9rem;
+  color: #bbb;
+}

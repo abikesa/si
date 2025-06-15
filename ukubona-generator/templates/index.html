@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ukubona Inc — Signal Noise Simulation Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0f1c;
+      color: #fff;
+    }
+    .task-card {
+      background-color: #1a1f2c;
+      border-left: 4px solid #00d1b2;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      position: relative;
+    }
+    .task-card:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -1.5rem;
+      left: 0;
+      background: #333;
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+    .is-overdue { border-color: #ff3860 !important; }
+    .is-due-today { border-color: #ffdd57 !important; }
+    .is-upcoming { border-color: #23d160 !important; }
+    .timeline-bar {
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .timeline-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff3860, #ffdd57, #23d160);
+      transition: width 0.3s ease;
+      animation: pulse 5s infinite linear;
+    }
+    @keyframes pulse {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.4); }
+      100% { filter: brightness(1); }
+    }
+    input[type="text"], input[type="date"] {
+      background: #0f1626;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 0.5rem;
+      margin: 0.25rem 0;
+      width: 100%;
+    }
+    .buttons {
+      margin-bottom: 1rem;
+    }
+    .selectors {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-white">📊 Ukubona Inc — Simulation Dashboard</h1>
+
+      <div class="selectors">
+        <div class="select">
+          <select id="roleSelect"></select>
+        </div>
+        <div class="select">
+          <select id="scopeSelect">
+            <option value="Tactical">Tactical</option>
+            <option value="Informational">Informational</option>
+            <option value="Strategic">Strategic</option>
+            <option value="Operational">Operational</option>
+            <option value="Existential">Existential</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="button is-link" onclick="exportCSV()">Export CSV</button>
+        <button class="button is-warning" onclick="document.getElementById('csvInput').click()">Import CSV</button>
+        <button class="button is-info" onclick="exportAllJSON()">Export JSON</button>
+        <input type="file" id="csvInput" accept=".csv" style="display: none;">
+      </div>
+
+      <div id="dashboard"></div>
+    </div>
+  </section>
+
+  <script>
+    const QUOTES = [
+      "Trust the tension.",
+      "Urgency is a signal.",
+      "The stack reveals the self.",
+      "Silence is strategic.",
+      "Signals love constraints."
+    ];
+
+    let mockData = JSON.parse(localStorage.getItem("dashboardData")) || {
+      "CEO": {
+        Tactical: [
+          { name: "Lebo", id: "C1", task: "Review investor deck", due: "2025-06-07" }
+        ],
+        Existential: [
+          { name: "Lebo", id: "C2", task: "Annual retreat planning", due: "2025-12-15" }
+        ]
+      },
+      "Intern": {
+        Tactical: [
+          { name: "Thandi", id: "I1", task: "Daily standup notes", due: "2025-06-07" }
+        ],
+        Strategic: [
+          { name: "Thandi", id: "I2", task: "Q3 onboarding draft", due: "2025-06-30" }
+        ]
+      },
+      "Engineer": {
+        Operational: [
+          { name: "Kabelo", id: "E1", task: "Patch security hole", due: "2025-06-09" },
+          { name: "Kabelo", id: "E2", task: "Rework auth flow", due: "2025-06-13" }
+        ]
+      }
+    };
+
+    const roleSelect = document.getElementById('roleSelect');
+    const scopeSelect = document.getElementById('scopeSelect');
+    const dashboard = document.getElementById('dashboard');
+
+    function initSelectors() {
+      roleSelect.innerHTML = '';
+      Object.keys(mockData).forEach(role => {
+        const opt = document.createElement('option');
+        opt.value = role;
+        opt.textContent = role;
+        roleSelect.appendChild(opt);
+      });
+    }
+
+    roleSelect.addEventListener('change', renderDashboard);
+    scopeSelect.addEventListener('change', renderDashboard);
+    initSelectors();
+    roleSelect.value = Object.keys(mockData)[0];
+    scopeSelect.value = "Tactical";
+    renderDashboard();
+
+    function getStatusClass(dueDateStr) {
+      const today = new Date();
+      const due = new Date(dueDateStr);
+      const diff = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+      if (diff < 0) return 'is-overdue';
+      if (diff === 0) return 'is-due-today';
+      return 'is-upcoming';
+    }
+
+    function renderDashboard() {
+      const role = roleSelect.value;
+      const scope = scopeSelect.value;
+      const tasks = (mockData[role] && mockData[role][scope]) || [];
+      dashboard.innerHTML = '';
+      tasks.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = `task-card ${getStatusClass(item.due)}`;
+        card.setAttribute('data-tooltip', QUOTES[(index + role.length + scope.length) % QUOTES.length]);
+
+        card.innerHTML = `
+          <input type="text" value="${item.name}" onchange="updateTask('${role}','${scope}', ${index}, 'name', this.value)">
+          <input type="text" value="${item.id}" onchange="updateTask('${role}','${scope}', ${index}, 'id', this.value)">
+          <input type="text" value="${item.task}" onchange="updateTask('${role}','${scope}', ${index}, 'task', this.value)">
+          <input type="date" value="${item.due}" onchange="updateTask('${role}','${scope}', ${index}, 'due', this.value)">
+          <div class="timeline-bar"><div class="timeline-fill" id="fill-${role}-${scope}-${index}"></div></div>
+        `;
+        dashboard.appendChild(card);
+
+        const fill = document.getElementById(`fill-${role}-${scope}-${index}`);
+        const today = new Date();
+        const dueDate = new Date(item.due);
+        const daysDiff = (dueDate - today) / (1000 * 60 * 60 * 24);
+        const percent = Math.max(0, Math.min(100, 100 - daysDiff * 10));
+        fill.style.width = percent + '%';
+      });
+      localStorage.setItem("dashboardData", JSON.stringify(mockData));
+    }
+
+    function updateTask(role, scope, index, key, value) {
+      mockData[role][scope][index][key] = value;
+      if (key === 'due') renderDashboard();
+      localStorage.setItem("dashboardData", JSON.stringify(mockData));
+    }
+
+    function exportCSV() {
+      const role = roleSelect.value;
+      const scope = scopeSelect.value;
+      const data = (mockData[role] && mockData[role][scope]) || [];
+      const rows = data.map(item => `${item.name},${item.id},${item.task},${item.due}`);
+      const csv = ['name,id,task,due', ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${role}_${scope}_tasks.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('csvInput').addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const lines = e.target.result.trim().split('\n');
+        const [header, ...rows] = lines;
+        const data = rows.map(line => {
+          const [name, id, task, due] = line.split(',');
+          return { name, id, task, due };
+        });
+        const role = roleSelect.value;
+        const scope = scopeSelect.value;
+        mockData[role] = mockData[role] || {};
+        mockData[role][scope] = data;
+        renderDashboard();
+      };
+      reader.readAsText(file);
+    });
+
+    function exportAllJSON() {
+      const json = JSON.stringify(mockData, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ukubona_dashboard_data.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

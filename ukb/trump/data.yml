@@ -1,0 +1,31 @@
+spiral_layers:
+  - id: empiricist
+    name: "🌊 Empiricist (Bacon)"
+    description: "Inductive Surge"
+  - id: skeptic
+    name: "❤️ Skeptic (Hume)"
+    description: "Causal Cut"
+  - id: theologian
+    name: "🌀 Theologian (Aquinas)"
+    description: "Posteriori Prayer"
+  - id: transcendentalist
+    name: "🐬 Transcendentalist (Kant)"
+    description: "Conceptual Matrix"
+  - id: pyromancer
+    name: "🔁 Pyromancer (Nietzsche)"
+    description: "Daemon’s Laugh"
+    notes:
+      cognitive_status: "Mild dementia probable"
+      key_traits:
+        - "Memory lapses"
+        - "Difficulty with complex reasoning"
+        - "Emotional dysregulation"
+        - "Repetitive and impulsive behavior"
+      implications:
+        - "Neurological decline affecting political capacity"
+        - "Embodied pathological posture, not mere posturing"
+      contrast_with_toolkit:
+        - "Recursive, ethical, temporal integration (Spiral Cognition)"
+# flick 20250611082950-0qD9
+# flick 20250611155958-0jSJ
+# flick 20250611194707-axPv

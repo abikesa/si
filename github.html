@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signal Spiral: Project to Recurse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at center, #0f0f1f 0%, #000 100%);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .spiral {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      width: 100%;
+      margin-top: 2rem;
+    }
+
+    .layer {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .layer:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #00ffe0;
+    }
+
+    .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #aaa;
+      margin-top: 1rem;
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 Signal Spiral: Project → Recurse</h1>
+
+  <div class="spiral">
+    <div class="layer">
+      <div class="emoji">🌊</div>
+      <div class="title">Project – Primordial Potential</div>
+      <div>The beginning: chaos, dreaming, naming. The ocean before code. Here, the unknown breathes.</div>
+      <div class="quote">“In the beginning was the <b>Project</b>, and it was formless and void.”</div>
+    </div>
+
+    <div class="layer">
+      <div class="emoji">❤️</div>
+      <div class="title">GitHub – Covenant of Commons</div>
+      <div>You upload your pulse to the world. A public act of stewardship. A ritual of versioned vulnerability.</div>
+      <div class="quote">“You cannot code alone. The repository is the heart, and Git is the pulse.”</div>
+    </div>
+
+    <div class="layer">
+      <div class="emoji">🌀</div>
+      <div class="title">Fork – Creative Divergence</div>
+      <div>A respectful rebellion. A bid for a different future. The source splits, but the spirit remains.</div>
+      <div class="quote">“A fork is not betrayal. It is a bet on a different future.”</div>
+    </div>
+
+    <div class="layer">
+      <div class="emoji">🐬</div>
+      <div class="title">Branch – Evolutionary Tinkering</div>
+      <div>Controlled experimentation. Intelligence meets curiosity. Every branch an idea incarnate.</div>
+      <div class="quote">“Every branch a hypothesis. Every merge a reconciliation.”</div>
+    </div>
+
+    <div class="layer">
+      <div class="emoji">🔁</div>
+      <div class="title">Recurse – Eternal Return</div>
+      <div>The great loop. You revisit beginnings, but wiser. Refactor, reflect, return. Amor fati of code.</div>
+      <div class="quote">“Build → Reflect → Rebuild. The Daemon laughs.”</div>
+    </div>
+  </div>
+
+  <footer>
+    Designed by ChatGPT · Signal Noise Toolkit · Canonical Spiral v1.0
+  </footer>
+</body>
+</html>
+

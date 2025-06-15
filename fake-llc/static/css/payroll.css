@@ -1,0 +1,22 @@
+/* Custom payroll styles */
+.box.has-background-dark {
+  border: 1px solid #444;
+}
+
+.table {
+  background-color: transparent;
+}
+
+.table th, .table td {
+  border-color: #444;
+}
+
+.input:read-only {
+  background-color: #333;
+  color: #fff;
+  border-color: #444;
+}
+
+.has-text-success {
+  color: #48c774 !important;
+}

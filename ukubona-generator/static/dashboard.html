@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ukubona Inc — Signal Noise Simulation Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+    }
+    .task-card {
+      background: #1e1e1e;
+      border-left: 6px solid #4caf50;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 255, 255, 0.1);
+      transition: transform 0.2s;
+    }
+    .task-card:hover {
+      transform: scale(1.01);
+      border-color: #00d1b2;
+    }
+    .overdue { border-left-color: #ff3860; }
+    .due-today { border-left-color: #ffdd57; }
+    .upcoming { border-left-color: #4caf50; }
+    .timeline-bar {
+      height: 8px;
+      background: #2c2c2c;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+    .timeline-fill {
+      height: 100%;
+      background: linear-gradient(to right, #00d1b2, #23d160);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .dropdowns {
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-white">🌍 Signal Noise Simulation Dashboard</h1>
+      <div class="dropdowns">
+        <div class="select is-primary">
+          <select id="roleSelect" onchange="renderDashboard()">
+            <option value="founder">Founder/CEO</option>
+            <option value="employee">Employee</option>
+            <option value="client">Client</option>
+            <option value="intern">Intern</option>
+            <option value="regulator">Regulator</option>
+          </select>
+        </div>
+        <div class="select is-link" style="margin-left: 1rem;">
+          <select id="scopeSelect" onchange="renderDashboard()">
+            <option value="existential">Existential</option>
+            <option value="strategic">Strategic</option>
+            <option value="operational">Operational</option>
+            <option value="tactical">Tactical</option>
+            <option value="informational">Informational</option>
+          </select>
+        </div>
+      </div>
+      <div id="dashboard"></div>
+    </div>
+  </section>
+
+  <script>
+    const dashboard = document.getElementById('dashboard');
+    const roleSelect = document.getElementById('roleSelect');
+    const scopeSelect = document.getElementById('scopeSelect');
+
+    const QUOTES = [
+      "‘Abandon all hope, ye who enter here.’",
+      "‘All that is solid melts into air.’",
+      "‘Trust, once broken, is rarely mended.’",
+      "‘Operational clarity requires existential humility.’",
+      "‘Noise is what we haven’t learned to signal yet.’"
+    ];
+
+    let mockData = JSON.parse(localStorage.getItem("dashboardData")) || {
+      founder: {
+        existential: [{ id: "F1", task: "Define cosmology", name: "Abi", due: "2025-06-08" }],
+        strategic: [{ id: "F2", task: "Board pitch deck", name: "Abi", due: "2025-06-10" }],
+        operational: [{ id: "F3", task: "Hire CTO", name: "Abi", due: "2025-06-15" }],
+        tactical: [{ id: "F4", task: "GitHub setup", name: "Abi", due: "2025-06-07" }],
+        informational: [{ id: "F5", task: "Publish blog", name: "Abi", due: "2025-06-11" }]
+      },
+      intern: {
+        existential: [{ id: "I1", task: "Write manifesto", name: "Eliza", due: "2025-06-08" }],
+        strategic: [{ id: "I2", task: "Read Umami Papers", name: "Eliza", due: "2025-06-09" }],
+        operational: [{ id: "I3", task: "Mock dashboard UX", name: "Eliza", due: "2025-06-10" }],
+        tactical: [{ id: "I4", task: "Organize files", name: "Eliza", due: "2025-06-07" }],
+        informational: [{ id: "I5", task: "Log updates", name: "Eliza", due: "2025-06-08" }]
+      }
+    };
+
+    function getStatusClass(dueDate) {
+      const due = new Date(dueDate);
+      const now = new Date();
+      const diffDays = Math.floor((due - now) / (1000 * 60 * 60 * 24));
+      if (diffDays < 0) return 'overdue';
+      if (diffDays === 0) return 'due-today';
+      return 'upcoming';
+    }
+
+    function renderDashboard() {
+      const role = roleSelect.value;
+      const scope = scopeSelect.value;
+      const tasks = (mockData[role] && mockData[role][scope]) || [];
+      dashboard.innerHTML = '';
+
+      tasks.forEach((item, index) => {
+        const due = new Date(item.due);
+        const now = new Date();
+        const msPerDay = 1000 * 60 * 60 * 24;
+        const diffDays = Math.ceil((due - now) / msPerDay);
+        const percent = Math.max(0, Math.min(100, 100 - (diffDays * 10)));
+        const statusClass = getStatusClass(item.due);
+        const quote = QUOTES[(index + role.length + scope.length) % QUOTES.length];
+
+        const card = document.createElement('div');
+        card.className = `task-card ${statusClass}`;
+        card.setAttribute('data-tooltip', quote);
+
+        card.innerHTML = `
+          <p><strong>${item.task}</strong> (${item.id})</p>
+          <p>👤 <em>${item.name}</em></p>
+          <p>📅 Due: <input type="date" value="${item.due}" onchange="updateDueDate('${role}','${scope}',${index}, this.value)"/></p>
+          <p>⏳ ${diffDays < 0 ? `Overdue by ${-diffDays} day(s)` : `Due in ${diffDays} day(s)`}</p>
+          <div class="timeline-bar">
+            <div class="timeline-fill" style="width: ${percent}%;"></div>
+          </div>
+        `;
+        dashboard.appendChild(card);
+      });
+    }
+
+    function updateDueDate(role, scope, index, newDate) {
+      mockData[role][scope][index].due = newDate;
+      localStorage.setItem("dashboardData", JSON.stringify(mockData));
+      renderDashboard();
+    }
+
+    renderDashboard(); // Load initial view
+  </script>
+</body>
+</html>

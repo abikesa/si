@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔁 Behavioral vs Generative</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
+  </script>
+  <style>
+    :root {
+      --bg: #111;
+      --fg: #eee;
+      --accent: #00ffe0;
+      --node-bg: #222;
+      --node-border: #555;
+    }
+
+    [data-theme="light"] {
+      --bg: #f9f9f9;
+      --fg: #111;
+      --accent: #0077ff;
+      --node-bg: #fff;
+      --node-border: #ccc;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: 'Segoe UI', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .mermaid {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--node-bg);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 2rem auto;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleTheme()" aria-label="Toggle light/dark theme">Toggle Theme</button>
+
+  <h1>🔁 Behavioral vs Generative</h1>
+
+  <div class="content">
+    <p><strong>Behavioral</strong> is what your system <em>does</em> — the interface, the interaction, the social contract, the ritual.</p>
+    <p><strong>Generative</strong> is what your system <em>can create</em> — it’s power, surprise, emergence, new form.</p>
+    <p>Behavioral is conservative. Generative is revolutionary.</p>
+    <p>To only be behavioral is to stabilize. To only be generative is to spiral out. The <em>Signal Noise Toolkit</em> must walk the spiral line between them.</p>
+  </div>
+
+  <div class="mermaid">
+    graph TD
+    A5[.app → 🎭 Act] --> B5[Behavioral]
+    A5 --> B6[Generative]
+
+    %% Behavioral Path
+    B5 --> C5[📱 App]
+    C5 --> D5[💡 Concepts]
+    D5 --> E5[UI/UX]
+    E5 --> F5[Habitual]
+    F5 --> G5[Intentional]
+    G5 --> H5[Cooperative]
+    H5 --> I5[Emergent]
+
+    %% Generative Path
+    B6 --> C6[🤖 Model]
+    C6 --> D6[🎨 Style]
+    D6 --> E6[⌨️ Prompt]
+    E6 --> F6[💥 Surprise]
+    F6 --> G6[🧠 Insight]
+    G6 --> H6[🔥 Breakthrough]
+    H6 --> I6[♻️ Re-entry]
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    }
+  </script>
+</body>
+</html>
