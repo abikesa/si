@@ -4,9 +4,9 @@
 # Book metadata
 
 title                       : Stata Programming
-author                      : 
-copyright                   :  
-logo                        : ./jhu-logo.png
+author                      : ""
+copyright                   : ""
+logo                        : ./jhu-logo-horizontal.jpeg
 email                       : "abikesa.sh@gmail.com"
 exclude_patterns            : ["LICENSE.md"]
 
