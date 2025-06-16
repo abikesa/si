@@ -6,7 +6,7 @@
 title                       : Stata Programming
 author                      : 
 copyright                   :  
-logo                        : ./jhu-logo.jpeg
+logo                        : ./jhu-logo.png
 email                       : "abikesa.sh@gmail.com"
 exclude_patterns            : ["LICENSE.md"]
 
