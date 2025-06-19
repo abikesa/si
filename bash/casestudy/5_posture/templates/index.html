@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Signal–Trust Stack</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script>
+    async function loadLayers() {
+      const res = await fetch('/layers');
+      const layers = await res.json();
+      const container = document.getElementById('stack');
+      container.innerHTML = layers.map(layer => `
+        <div class="layer">
+          <h2>${layer.emoji} ${layer.name}</h2>
+          <p><strong>Function:</strong> ${layer.function}</p>
+          <p><strong>Shadow:</strong> ${layer.shadow}</p>
+        </div>
+      `).join('');
+    }
+    window.onload = loadLayers;
+  </script>
+</head>
+<body>
+  <h1>🌊❤️🌀🐬🔁 Signal–Trust Stack</h1>
+  <div id="stack"></div>
+</body>
+</html>
+

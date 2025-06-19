@@ -1,0 +1,23 @@
+stack: Signal–Trust
+layers:
+  - name: Heritage
+    emoji: "🌊"
+    function: "Memory, Inheritance"
+    shadow: "Erasure, Colonial Defaults"
+  - name: Commons
+    emoji: "❤️"
+    function: "Shared Trust, Stewardship"
+    shadow: "Exploitation, Extraction"
+  - name: Faustian
+    emoji: "🌀"
+    function: "Risk, Power, Innovation"
+    shadow: "Hubris, Collapse"
+  - name: Identity
+    emoji: "🐬"
+    function: "Interface, Self-Claiming"
+    shadow: "Surveillance, Manipulation"
+  - name: Authentication
+    emoji: "🔁"
+    function: "Verification, Ritual"
+    shadow: "Gatekeeping, Alienation"
+

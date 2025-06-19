@@ -1,0 +1,19 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #111;
+  color: #eee;
+  padding: 2em;
+  max-width: 800px;
+  margin: auto;
+}
+.layer {
+  border-left: 4px solid #f39c12;
+  padding-left: 1em;
+  margin-bottom: 2em;
+  background: #1a1a1a;
+  padding: 1em;
+}
+h1, h2 {
+  color: #f39c12;
+}
+

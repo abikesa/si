@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signal–Trust Viewer</title>
+  <script>
+    async function loadLayers() {
+      const res = await fetch('/layers');
+      const layers = await res.json();
+      document.getElementById('stack').innerHTML = layers.map(layer => `
+        <div style="margin:1em;padding:1em;border:1px solid #ccc;">
+          <h2>${layer.emoji} ${layer.name}</h2>
+          <p><strong>Function:</strong> ${layer.function}</p>
+          <p><strong>Shadow:</strong> ${layer.shadow}</p>
+        </div>
+      `).join('');
+    }
+    window.onload = loadLayers;
+  </script>
+</head>
+<body>
+  <h1>🌊❤️🌀🐬🔁 Signal–Trust Stack</h1>
+  <div id="stack"></div>
+</body>
+</html>
+

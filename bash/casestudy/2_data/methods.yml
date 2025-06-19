@@ -1,0 +1,22 @@
+neurocosmic_stack:
+  - id: heritage
+    emoji: "🌊"
+    title: "Heritage"
+    description: "Origin stories, ancestral inputs, unchosen legacies, foundational data"
+  - id: commons
+    emoji: "❤️"
+    title: "Commons"
+    description: "Shared infrastructure, collective memory, mutual ethics"
+  - id: faustian
+    emoji: "🌀"
+    title: "Faustian"
+    description: "Tradeoffs, bargains, knowledge-for-power pacts, technological acceleration"
+  - id: identity
+    emoji: "🐬"
+    title: "Identity"
+    description: "Selfhood in context, Ubuntu, recognition, individuation through relations"
+  - id: authentication
+    emoji: "🔁"
+    title: "Authentication"
+    description: "Access control, recognition, trust loops, symbolic thresholds"
+
