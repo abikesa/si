@@ -15,7 +15,7 @@ Please note: **Core documentation is deeply buried.** Explore the nested directo
 
 ---
 
-## 🌌 Overview
+## 🌌 Overview    
 
 | Layer | Function                            | Example Module           | Status        |
 |-------|-------------------------------------|--------------------------|---------------|
