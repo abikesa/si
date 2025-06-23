@@ -1,0 +1,767 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3. 🔁 Loops and program syntax &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter3';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. 🗃️ Advanced file management" href="chapter4.html" />
+    <link rel="prev" title="2. ✍️ Macros and the Art of Memory" href="chapter2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logos-vertical.jpg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/logos-vertical.jpg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    🎓 Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. 🧠 Collaborative Stata Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. ✍️ <em>Macros and the Art of Memory</em></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. 🔁 Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. 🗃️ Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. 📊 Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">📌 Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/chapter3.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3. 🔁 Loops and program syntax</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-learning-philosophy">Key Learning Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-understanding-macros">Part 1: Understanding Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-macro">What is a Macro?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-macros">Types of Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#local-macros">Local Macros</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#global-macros">Global Macros</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-flexibility">Macro Flexibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-persistence-and-scope">Macro Persistence and Scope</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-cross-platform-programming-with-macros">Part 2: Cross-Platform Programming with Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slash-issue-problem">The Slash Issue Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-use-macros-for-os-detection">Solution: Use Macros for OS Detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-understanding-loops">Part 3: Understanding Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-loop">What is a Loop?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-establish-a-loop-in-stata">How to Establish a Loop in Stata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-elements-of-a-loop">Key Elements of a Loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-practical-loop-examples">Part 4: Practical Loop Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-1-display-information-multiple-times">Target 1: Display Information Multiple Times</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-loop">Without Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-loop-much-more-efficient">With Loop (Much More Efficient!)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-learning-stata-programming">Best Practices for Learning Stata Programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#professional-development-approach">Professional Development Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-learning-strategies">Effective Learning Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-programming-skills">Building Your Programming Skills</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways-for-graduate-students">Key Takeaways for Graduate Students</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-for-continued-learning">Next Steps for Continued Learning</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="loops-and-program-syntax">
+<h1>3. 🔁 Loops and program syntax<a class="headerlink" href="#loops-and-program-syntax" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="chapter3-old.html"><span class="std std-doc">Old</span></a> notes</p></li>
+<li><p><a class="reference internal" href="chapter3-alt.html"><span class="std std-doc">Alt</span></a> notes (for Stata 13)</p></li>
+</ul>
+<section id="key-learning-philosophy">
+<h2>Key Learning Philosophy<a class="headerlink" href="#key-learning-philosophy" title="Permalink to this heading">#</a></h2>
+<p><strong>Important Perspective</strong>: We cannot exhaust the number of Stata commands available - there are simply too many, and it’s not worth your time to memorize them all. Instead, focus on mastering the fundamental programming concepts that will make you efficient and effective.</p>
+<p><strong>Core Focus</strong>: Macros and loops are by far the central part of Stata programming. These are the tools that will transform you from a basic Stata user into a sophisticated programmer.</p>
+</section>
+<hr class="docutils" />
+<section id="part-1-understanding-macros">
+<h2>Part 1: Understanding Macros<a class="headerlink" href="#part-1-understanding-macros" title="Permalink to this heading">#</a></h2>
+<section id="what-is-a-macro">
+<h3>What is a Macro?<a class="headerlink" href="#what-is-a-macro" title="Permalink to this heading">#</a></h3>
+<p>A macro is a way to store and reuse information in Stata. Think of it as a container that holds either:</p>
+<ul class="simple">
+<li><p><strong>Temporary information</strong> (local macros)</p></li>
+<li><p><strong>Persistent information</strong> (global macros)</p></li>
+</ul>
+</section>
+<section id="types-of-macros">
+<h3>Types of Macros<a class="headerlink" href="#types-of-macros" title="Permalink to this heading">#</a></h3>
+<section id="local-macros">
+<h4>Local Macros<a class="headerlink" href="#local-macros" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Exist only within the current session/program</p></li>
+<li><p>Syntax: <code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">macro_name</span> <span class="pre">=</span> <span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">macro_name</span> <span class="pre">&quot;some</span> <span class="pre">string&quot;</span></code></p></li>
+<li><p>Called using: <code class="docutils literal notranslate"><span class="pre">macro_name'</span></code> (note the backtick and apostrophe)</p></li>
+</ul>
+</section>
+<section id="global-macros">
+<h4>Global Macros<a class="headerlink" href="#global-macros" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Persist across sessions and programs</p></li>
+<li><p>Syntax: <code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">macro_name</span> <span class="pre">:</span> <span class="pre">di</span> <span class="pre">&quot;some</span> <span class="pre">string&quot;</span></code></p></li>
+<li><p>Called using: <code class="docutils literal notranslate"><span class="pre">$macro_name</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="macro-flexibility">
+<h3>Macro Flexibility<a class="headerlink" href="#macro-flexibility" title="Permalink to this heading">#</a></h3>
+<p>The way we assign string values to macros is highly flexible - it’s not just for strings! You can use macros for:</p>
+<ul class="simple">
+<li><p>Numbers and calculations</p></li>
+<li><p>Variable names</p></li>
+<li><p>Command options</p></li>
+<li><p>File paths</p></li>
+<li><p>Complex expressions</p></li>
+</ul>
+<p><strong>Pro Tip</strong>: Use <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">local</span></code> to discover the full range of possibilities.</p>
+</section>
+<section id="macro-persistence-and-scope">
+<h3>Macro Persistence and Scope<a class="headerlink" href="#macro-persistence-and-scope" title="Permalink to this heading">#</a></h3>
+<p><strong>Key Concept</strong>: Understanding which macros are redefined when new commands are executed, and which remain unchanged.</p>
+<ul class="simple">
+<li><p><strong>Refreshed with commands</strong>: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">ereturn</span> <span class="pre">list</span></code></p></li>
+<li><p><strong>Remains constant and defined system-wide</strong>: <code class="docutils literal notranslate"><span class="pre">creturn</span> <span class="pre">list</span></code></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-2-cross-platform-programming-with-macros">
+<h2>Part 2: Cross-Platform Programming with Macros<a class="headerlink" href="#part-2-cross-platform-programming-with-macros" title="Permalink to this heading">#</a></h2>
+<section id="the-slash-issue-problem">
+<h3>The Slash Issue Problem<a class="headerlink" href="#the-slash-issue-problem" title="Permalink to this heading">#</a></h3>
+<p>Different operating systems use different directory separators:</p>
+<ul class="simple">
+<li><p><strong>MacOS</strong>: <code class="docutils literal notranslate"><span class="pre">/</span></code> (forward slash)</p></li>
+<li><p><strong>Windows</strong>: <code class="docutils literal notranslate"><span class="pre">\</span></code> (backslash)</p></li>
+</ul>
+</section>
+<section id="solution-use-macros-for-os-detection">
+<h3>Solution: Use Macros for OS Detection<a class="headerlink" href="#solution-use-macros-for-os-detection" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">// Example - use macros to address the slash issue in different OS</span>
+<span class="k">if</span> (<span class="s">&quot;</span><span class="nv">`c(os)&#39;</span><span class="s">&quot;</span> <span class="o">==</span> <span class="s">&quot;MacOSX&quot;</span>) {
+<span class="k">    global</span> slash :<span class="k"> di</span> <span class="s">&quot;/&quot;</span>
+}
+<span class="k">else if</span> (<span class="s">&quot;</span><span class="nv">`c(os)&#39;</span><span class="s">&quot;</span> <span class="o">==</span> <span class="s">&quot;Windows&quot;</span>) {
+<span class="k">    global</span> slash :<span class="k"> di</span> <span class="s">&quot;</span><span class="se">\&quot;</span>
+}
+</pre></div>
+</div>
+<p>This approach makes your code portable across different operating systems.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-3-understanding-loops">
+<h2>Part 3: Understanding Loops<a class="headerlink" href="#part-3-understanding-loops" title="Permalink to this heading">#</a></h2>
+<section id="what-is-a-loop">
+<h3>What is a Loop?<a class="headerlink" href="#what-is-a-loop" title="Permalink to this heading">#</a></h3>
+<p>There are many definitions, but here’s a practical understanding:</p>
+<p><strong>Loops are certain chunks of code that are consecutively executed until a designated end has been reached.</strong></p>
+<p><strong>Every single execution in the loop is called an iteration of the loop.</strong></p>
+</section>
+<section id="how-to-establish-a-loop-in-stata">
+<h3>How to Establish a Loop in Stata<a class="headerlink" href="#how-to-establish-a-loop-in-stata" title="Permalink to this heading">#</a></h3>
+<p><strong>Basic Approaches</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>forvalues</strong> - to loop through a certain range of values</p></li>
+<li><p><strong>foreach</strong> - to loop through a certain list</p></li>
+<li><p><strong>while</strong> - to loop until a certain condition is satisfied/unsatisfied</p></li>
+</ol>
+</section>
+<section id="key-elements-of-a-loop">
+<h3>Key Elements of a Loop<a class="headerlink" href="#key-elements-of-a-loop" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Loop defining keywords</strong> (forvalues/foreach/while)</p></li>
+<li><p><strong>A name of the macro</strong> used to store the changing values</p></li>
+<li><p><strong>Brackets</strong> to define the loop’s scope</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-4-practical-loop-examples">
+<h2>Part 4: Practical Loop Examples<a class="headerlink" href="#part-4-practical-loop-examples" title="Permalink to this heading">#</a></h2>
+<section id="target-1-display-information-multiple-times">
+<h3>Target 1: Display Information Multiple Times<a class="headerlink" href="#target-1-display-information-multiple-times" title="Permalink to this heading">#</a></h3>
+<p>Let’s say we want to display the string “Hello World” for 5 times.</p>
+<section id="without-loop">
+<h4>Without Loop<a class="headerlink" href="#without-loop" title="Permalink to this heading">#</a></h4>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+<span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+<span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+<span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+<span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="with-loop-much-more-efficient">
+<h4>With Loop (Much More Efficient!)<a class="headerlink" href="#with-loop-much-more-efficient" title="Permalink to this heading">#</a></h4>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">forvalues</span> i = <span class="m">1</span><span class="o">/</span><span class="m">5</span> {
+<span class="k">    di</span> <span class="s">&quot;Hello World&quot;</span>
+}
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="best-practices-for-learning-stata-programming">
+<h2>Best Practices for Learning Stata Programming<a class="headerlink" href="#best-practices-for-learning-stata-programming" title="Permalink to this heading">#</a></h2>
+<section id="professional-development-approach">
+<h3>Professional Development Approach<a class="headerlink" href="#professional-development-approach" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Use .do files</strong> for all your work - this is the professional standard</p></li>
+<li><p><strong>Focus on practical applications</strong> - learn concepts through real-world examples</p></li>
+<li><p><strong>Develop systematic habits</strong> - consistent approach to coding and documentation</p></li>
+</ul>
+</section>
+<section id="effective-learning-strategies">
+<h3>Effective Learning Strategies<a class="headerlink" href="#effective-learning-strategies" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Annotation</strong>: Always comment your code to explain what each section does</p></li>
+<li><p><strong>Live Testing</strong>: Run and modify code iteratively to understand behavior</p></li>
+<li><p><strong>Reproducible Workflow</strong>: Build code that others (and future you) can understand and run</p></li>
+</ol>
+</section>
+<section id="building-your-programming-skills">
+<h3>Building Your Programming Skills<a class="headerlink" href="#building-your-programming-skills" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Save and organize your code examples for future reference</p></li>
+<li><p>Create a personal library of useful macros and loop structures</p></li>
+<li><p>Practice translating repetitive tasks into efficient programmatic solutions</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="key-takeaways-for-graduate-students">
+<h2>Key Takeaways for Graduate Students<a class="headerlink" href="#key-takeaways-for-graduate-students" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Don’t memorize commands</strong> - focus on understanding programming logic</p></li>
+<li><p><strong>Master macros and loops</strong> - these are your power tools</p></li>
+<li><p><strong>Think about portability</strong> - write code that works across different systems</p></li>
+<li><p><strong>Practice with .do files</strong> - this is how professionals work</p></li>
+<li><p><strong>Use loops to avoid repetition</strong> - if you’re copying and pasting code, there’s probably a loop solution</p></li>
+</ol>
+<section id="next-steps-for-continued-learning">
+<h3>Next Steps for Continued Learning<a class="headerlink" href="#next-steps-for-continued-learning" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Practice the examples and concepts covered in these notes</p></li>
+<li><p>Experiment with different types of loops in your own data projects</p></li>
+<li><p>Start incorporating macros into your regular Stata workflow</p></li>
+<li><p>Build a personal collection of useful code snippets and templates</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2. ✍️ <em>Macros and the Art of Memory</em></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4. 🗃️ Advanced file management</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-learning-philosophy">Key Learning Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-understanding-macros">Part 1: Understanding Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-macro">What is a Macro?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-macros">Types of Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#local-macros">Local Macros</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#global-macros">Global Macros</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-flexibility">Macro Flexibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-persistence-and-scope">Macro Persistence and Scope</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-cross-platform-programming-with-macros">Part 2: Cross-Platform Programming with Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slash-issue-problem">The Slash Issue Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-use-macros-for-os-detection">Solution: Use Macros for OS Detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-understanding-loops">Part 3: Understanding Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-loop">What is a Loop?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-establish-a-loop-in-stata">How to Establish a Loop in Stata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-elements-of-a-loop">Key Elements of a Loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-practical-loop-examples">Part 4: Practical Loop Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-1-display-information-multiple-times">Target 1: Display Information Multiple Times</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-loop">Without Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-loop-much-more-efficient">With Loop (Much More Efficient!)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-learning-stata-programming">Best Practices for Learning Stata Programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#professional-development-approach">Professional Development Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-learning-strategies">Effective Learning Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-programming-skills">Building Your Programming Skills</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways-for-graduate-students">Key Takeaways for Graduate Students</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-for-continued-learning">Next Steps for Continued Learning</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Vincent Jin & Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

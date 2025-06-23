@@ -1,0 +1,749 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>🧠 Monday Theme: “Code as Protocol, Folder as Ethic” &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter5-lab';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logos-vertical.jpg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/logos-vertical.jpg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    🎓 Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. 🧠 Collaborative Stata Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. ✍️ <em>Macros and the Art of Memory</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. 🔁 Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. 🗃️ Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. 📊 Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">📌 Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/chapter5-lab.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter5-lab.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>🧠 Monday Theme: “Code as Protocol, Folder as Ethic”</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">🧠 <strong>Monday Theme:</strong> <em>“Code as Protocol, Folder as Ethic”</em></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#folder-architecture-scaffold-for-all-projects">🏗️ Folder Architecture (Scaffold for All Projects)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lab5-template-do-for-students-ready-to-fill-in">🔹 <code class="docutils literal notranslate"><span class="pre">lab5_template.do</span></code> (for students — ready to fill in)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#master-do-for-non-stata-collaborator-to-run">🔸 <code class="docutils literal notranslate"><span class="pre">master.do</span></code> (for non-Stata collaborator to run)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#teaching-objectives-for-monday">💡 Teaching Objectives for Monday</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-metaphor">🛡️ Key Metaphor</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="monday-theme-code-as-protocol-folder-as-ethic">
+<h1>🧠 <strong>Monday Theme:</strong> <em>“Code as Protocol, Folder as Ethic”</em><a class="headerlink" href="#monday-theme-code-as-protocol-folder-as-ethic" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p><em>“Drop this .do file and your .dta into a folder. Click run. It’ll do the rest.”</em>
+That’s what a <strong>non-Stata data guardian</strong> needs.
+It creates an <em>ethical workspace</em>, keeps outputs contained, and produces <strong>verifiable artifacts</strong>: logs, tables, plots.</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="folder-architecture-scaffold-for-all-projects">
+<h1>🏗️ Folder Architecture (Scaffold for All Projects)<a class="headerlink" href="#folder-architecture-scaffold-for-all-projects" title="Permalink to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>project/
+├── code/           # .do files
+│   └── lab5_template.do
+├── data/           # .dta files go here
+├── output/         # Graphs, logs, tables
+├── notes/          # README, variable dictionary, protocols
+└── master.do       # Calls everything in code/
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="lab5-template-do-for-students-ready-to-fill-in">
+<h1>🔹 <code class="docutils literal notranslate"><span class="pre">lab5_template.do</span></code> (for students — ready to fill in)<a class="headerlink" href="#lab5-template-do-for-students-ready-to-fill-in" title="Permalink to this heading">#</a></h1>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">************************************************************</span>
+<span class="c1">* lab5.do - Self-organizing portable lab file (needs debugging)</span>
+<span class="c1">************************************************************</span>
+
+<span class="k">clear</span> all
+<span class="k">set more</span> off
+
+<span class="c1">* 1. Define root folder</span>
+<span class="k">local</span> root = <span class="nf">c</span>(pwd)
+
+<span class="c1">* 2. Define folder paths</span>
+<span class="k">local</span> data   <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/data&quot;</span>
+<span class="k">local</span> output <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/output&quot;</span>
+<span class="k">local</span> code   <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/code&quot;</span>
+<span class="k">local notes</span>  <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/notes&quot;</span>
+
+<span class="c1">* 3. Create folders</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`code&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`notes&#39;</span><span class="s">&quot;</span>
+
+<span class="c1">* 4. Move all .dta files into /data/</span>
+<span class="k">local</span> dtafiles :<span class="k"> dir</span> <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">&quot;</span> files <span class="s">&quot;*.dta&quot;</span>
+<span class="k">foreach</span> f of<span class="k"> local</span> dtafiles {
+<span class="k">    local</span> src <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    local</span> dest <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    copy</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span> <span class="s">&quot;</span><span class="nv">`dest&#39;</span><span class="s">&quot;</span>,<span class="k"> replace</span>
+<span class="k">    erase</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span>
+}
+
+<span class="c1">* 5. Change directory to /data</span>
+<span class="k">cd</span> <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">&quot;</span>
+
+<span class="c1">* 6. Start log</span>
+<span class="k">log</span> using <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/lab5_output.log&quot;</span>,<span class="k"> replace</span>
+
+<span class="c1">* 7. Load and merge data</span>
+<span class="k">use</span> transplants<span class="m">.</span>dta,<span class="k"> clear</span>
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients<span class="m">.</span>dta
+<span class="k">drop if</span> _merge <span class="o">!=</span> <span class="m">3</span>
+
+<span class="c1">* 8. Create variables</span>
+<span class="k">gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
+<span class="k">gen</span> f_time = end_d <span class="o">-</span> transplant_d
+<span class="k">format</span> transplant_d end_d <span class="nx">%td</span>
+<span class="k">stset</span> f_time, failure(died)
+
+<span class="c1">* 9. Graph</span>
+<span class="k">sts graph</span>,<span class="k"> by</span>(over50)
+<span class="k">graph</span> export <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/survival_over50.png&quot;</span>,<span class="k"> replace</span>
+
+<span class="c1">* 10. Close log</span>
+<span class="k">log close</span>
+</pre></div>
+</div>
+<details>
+    <summary>v1.1</summary>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">************************************************************</span>
+<span class="c1">* lab5.do - Self-organizing portable lab file  </span>
+<span class="c1">************************************************************</span>
+
+<span class="k">clear</span> all
+<span class="k">set more</span> off
+
+<span class="c1">* 1. Define root folder</span>
+<span class="k">local</span> root = <span class="nf">c</span>(pwd)
+
+<span class="c1">* 2. Define folder paths</span>
+<span class="k">local</span> data   <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/data&quot;</span>
+<span class="k">local</span> output <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/output&quot;</span>
+<span class="k">local</span> code   <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/code&quot;</span>
+<span class="k">local notes</span>  <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/notes&quot;</span>
+
+<span class="c1">* 3. Create folders</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`code&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`notes&#39;</span><span class="s">&quot;</span>
+
+<span class="c1">* 4. Move all .dta files into /data/</span>
+<span class="k">local</span> dtafiles :<span class="k"> dir</span> <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">&quot;</span> files <span class="s">&quot;*.dta&quot;</span>
+<span class="k">foreach</span> f of<span class="k"> local</span> dtafiles {
+<span class="k">    local</span> src <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    local</span> dest <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    copy</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span> <span class="s">&quot;</span><span class="nv">`dest&#39;</span><span class="s">&quot;</span>,<span class="k"> replace</span>
+<span class="k">    erase</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span>
+}
+
+<span class="c1">* 5. Change directory to /data</span>
+<span class="c1">//cd &quot;`data&#39;&quot;</span>
+
+<span class="c1">* 6. Start log</span>
+<span class="k">capture drop</span> _all
+<span class="k">log</span> using <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/lab5_output.log&quot;</span>,<span class="k"> replace</span>
+
+<span class="c1">* 7. Load and merge data</span>
+<span class="k">use</span> <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/transplants.dta&quot;</span>,<span class="k"> clear</span>
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using data<span class="o">/</span>donors_recipients<span class="m">.</span>dta
+<span class="k">drop if</span> _merge <span class="o">!=</span> <span class="m">3</span>
+
+<span class="c1">* 8. Create variables</span>
+<span class="k">gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
+<span class="k">gen</span> f_time = end_d <span class="o">-</span> transplant_d
+<span class="k">format</span> transplant_d end_d <span class="nx">%td</span>
+<span class="k">stset</span> f_time, failure(died)
+
+<span class="c1">* 9. Graph</span>
+<span class="k">sts graph</span>,<span class="k"> by</span>(over50)
+<span class="k">graph</span> export <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/survival_over50.png&quot;</span>,<span class="k"> replace</span>
+
+<span class="c1">* 10. Close log</span>
+<span class="k">log close</span>
+<span class="k">display</span> <span class="s">&quot;✅ All done. No errors. Outputs created.&quot;</span>
+</pre></div>
+</div>
+</details>
+<details>
+    <summary>v1.2</summary>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">* ************************************************************</span>
+<span class="c1">* lab5_template.do - Self-organizing, reproducible lab file</span>
+<span class="c1">* Designed for OS-agnostic use + graceful handoff to others</span>
+<span class="c1">* ************************************************************</span>
+
+<span class="k">clear</span> all
+<span class="k">set more</span> off
+
+<span class="c1">* 🌊 INIT: Declare root &amp; core folders (relative to current location)</span>
+<span class="k">local</span> root = <span class="nf">c</span>(pwd)
+<span class="k">foreach</span> folder<span class="k"> in</span> data output code<span class="k"> notes</span> {
+<span class="k">    local</span> <span class="nv">`folder&#39;</span> <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/</span><span class="nv">`folder&#39;</span><span class="s">&quot;</span>
+<span class="k">    capture mkdir</span> <span class="nv">``folder&#39;&#39;</span>
+}
+
+<span class="c1">* ❤️ COMMIT: Move all .dta files into /data/ so it&#39;s clean + modular</span>
+<span class="k">local</span> dtafiles :<span class="k"> dir</span> <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">&quot;</span> files <span class="s">&quot;*.dta&quot;</span>
+<span class="k">foreach</span> f of<span class="k"> local</span> dtafiles {
+<span class="k">    local</span> src  <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    local</span> dest <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    copy</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span> <span class="s">&quot;</span><span class="nv">`dest&#39;</span><span class="s">&quot;</span>,<span class="k"> replace</span>
+<span class="k">    erase</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span>
+}
+
+<span class="c1">* 🌀 FORK: Create structure for logging &amp; error checking</span>
+<span class="k">capture drop</span> _all
+<span class="k">log</span> using <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/lab5_output.log&quot;</span>,<span class="k"> replace</span>
+
+<span class="c1">* 🐬 BRANCH: Load and prepare data</span>
+<span class="k">use</span> <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/transplants.dta&quot;</span>,<span class="k"> clear</span>
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/donors_recipients.dta&quot;</span>
+<span class="k">drop if</span> _merge <span class="o">!=</span> <span class="m">3</span>
+
+<span class="c1">* 🔁 MERGE: Create variables, apply formats, and set survival time</span>
+<span class="k">gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
+<span class="k">gen</span> f_time = end_d <span class="o">-</span> transplant_d
+<span class="k">format</span> transplant_d end_d <span class="nx">%td</span>
+<span class="k">stset</span> f_time, failure(died)
+
+<span class="c1">* 📊 OUTPUT: Graph and export results</span>
+<span class="k">sts graph</span>,<span class="k"> by</span>(over50)
+<span class="k">graph</span> export <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/survival_over50.png&quot;</span>,<span class="k"> replace</span>
+
+<span class="c1">* ✅ CLOSE: Log and finish</span>
+<span class="k">log close</span>
+<span class="k">display</span> <span class="s">&quot;✅ All done. No errors. Outputs created.&quot;</span>
+</pre></div>
+</div>
+</details>
+<hr class="docutils" />
+</section>
+<section id="master-do-for-non-stata-collaborator-to-run">
+<h1>🔸 <code class="docutils literal notranslate"><span class="pre">master.do</span></code> (for non-Stata collaborator to run)<a class="headerlink" href="#master-do-for-non-stata-collaborator-to-run" title="Permalink to this heading">#</a></h1>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">************************************************************</span>
+<span class="c1">*  master.do - Safe and Reproducible Entry Point</span>
+<span class="c1">*  For: Non-Stata collaborators, remote collaborators</span>
+<span class="c1">************************************************************</span>
+
+<span class="c1">* Detect current directory</span>
+<span class="k">cd</span> <span class="s">&quot;</span><span class="nv">`c(pwd)&#39;</span><span class="s">&quot;</span>
+
+<span class="c1">* Create subfolders if needed</span>
+<span class="k">cap mkdir</span> data
+<span class="k">cap mkdir</span> code
+<span class="k">cap mkdir</span> output
+<span class="k">cap mkdir notes</span>
+
+<span class="c1">* Reminder</span>
+<span class="k">di</span> <span class="s">&quot;✅ Project folders ready. Now place .dta files in /data, .do files in /code&quot;</span>
+
+<span class="c1">* Run lab5 template if it exists</span>
+<span class="k">cap do</span> code<span class="o">/</span>lab5_template<span class="m">.</span>do
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="teaching-objectives-for-monday">
+<h1>💡 Teaching Objectives for Monday<a class="headerlink" href="#teaching-objectives-for-monday" title="Permalink to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Skill</p></th>
+<th class="head"><p>Why It Matters</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Folder discipline</p></td>
+<td><p>Prevents sprawl and broken links</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">local</span></code></p></td>
+<td><p>Teaches controlled automation</p></td>
+</tr>
+<tr class="row-even"><td><p>Logging</p></td>
+<td><p>Accountability and reproducibility</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">master.do</span></code></p></td>
+<td><p>Separates execution from authoring</p></td>
+</tr>
+<tr class="row-even"><td><p>Relative paths</p></td>
+<td><p>Works across systems (Mac/PC/Linux)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Clear entry point</p></td>
+<td><p>Makes your collaborator feel safe</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+</section>
+<section id="key-metaphor">
+<h1>🛡️ Key Metaphor<a class="headerlink" href="#key-metaphor" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p><em>The folder is your lab bench. The <code class="docutils literal notranslate"><span class="pre">.do</span></code> file is your protocol. The log is your lab notebook. The graph is your publication. Don’t contaminate.</em></p>
+</div></blockquote>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">🧠 <strong>Monday Theme:</strong> <em>“Code as Protocol, Folder as Ethic”</em></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#folder-architecture-scaffold-for-all-projects">🏗️ Folder Architecture (Scaffold for All Projects)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lab5-template-do-for-students-ready-to-fill-in">🔹 <code class="docutils literal notranslate"><span class="pre">lab5_template.do</span></code> (for students — ready to fill in)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#master-do-for-non-stata-collaborator-to-run">🔸 <code class="docutils literal notranslate"><span class="pre">master.do</span></code> (for non-Stata collaborator to run)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#teaching-objectives-for-monday">💡 Teaching Objectives for Monday</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-metaphor">🛡️ Key Metaphor</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Vincent Jin & Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

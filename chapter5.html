@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5. 📊 Graphs &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter5';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="📌 Quick References" href="quickrefs.html" />
+    <link rel="prev" title="4. 🗃️ Advanced file management" href="chapter4.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logos-vertical.jpg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/logos-vertical.jpg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    🎓 Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. 🧠 Collaborative Stata Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. ✍️ <em>Macros and the Art of Memory</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. 🔁 Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. 🗃️ Advanced file management</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. 📊 Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">📌 Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/chapter5.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter5.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5. 📊 Graphs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-day-rework-lab-5-enriched-by-lab-4">💥 Final Day Rework: <strong>Lab 5, Enriched by Lab 4</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-walkthrough-plan-8-3012-20">👩🏽‍💻 <strong>Lecture + Walkthrough Plan (8:30–12:20)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-lab-4-concepts-into-lab-5-with-purpose">🔁 Merge Lab 4 Concepts into Lab 5 with Purpose</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-egen-tag-to-prep-variables-for-graphs">🧩 <strong>1. Use <code class="docutils literal notranslate"><span class="pre">egen</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code> to prep variables for graphs</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unknown-esrd-indicator">❓ <strong>2. Unknown ESRD indicator</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#died-within-6-months">⏱️ <strong>3. Died within 6 months</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wait-time-by-blood-type">⏳ <strong>4. Wait time by blood type</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-setup-for-lab-5-graphs">⚰️ Survival Setup for Lab 5 Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-to-lab-5-q6-bonus-but-essential-now">🧪 Add to Lab 5 — Q6 (Bonus, but essential now)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-5-do-scaffold-lab4-infused">💾 Lab 5 <code class="docutils literal notranslate"><span class="pre">.do</span></code> Scaffold (Lab4-infused)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaway">🧠 Takeaway</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="graphs">
+<h1>5. 📊 Graphs<a class="headerlink" href="#graphs" title="Permalink to this heading">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="chapter5-old.html"><span class="std std-doc">Old</span></a> Chapter</p></li>
+<li><p><a class="reference internal" href="chapter5-alt.html"><span class="std std-doc">Alt</span></a> Chapter</p></li>
+<li><p><a class="reference internal" href="chapter5-lab.html"><span class="std std-doc">Lab</span></a> Practice</p></li>
+</ul>
+</div>
+<p>We’re going to approach Day 5 with a <strong>full view of Lab 4</strong>. Since <strong>Lab 4 (Thursday)</strong> was lost to Juneteenth, and <strong>Lab 5 (Friday)</strong> depends on graphing, our job is to <strong>infuse Lab 5 with the missing logic of Lab 4</strong> — especially the <code class="docutils literal notranslate"><span class="pre">egen</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code>, and survival analysis foundation.</p>
+<p>What follows is a <strong>refined, conceptually integrated Friday (Lab 5)</strong> that fully <strong>honors Lab 4</strong>, but without dumping 2 labs on you.</p>
+<hr class="docutils" />
+<section id="final-day-rework-lab-5-enriched-by-lab-4">
+<h2>💥 Final Day Rework: <strong>Lab 5, Enriched by Lab 4</strong><a class="headerlink" href="#final-day-rework-lab-5-enriched-by-lab-4" title="Permalink to this heading">#</a></h2>
+<section id="lecture-walkthrough-plan-8-3012-20">
+<h3>👩🏽‍💻 <strong>Lecture + Walkthrough Plan (8:30–12:20)</strong><a class="headerlink" href="#lecture-walkthrough-plan-8-3012-20" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Time</p></th>
+<th class="head"><p>Topic</p></th>
+<th class="head"><p>From… → To…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>8:30–9:00</strong></p></td>
+<td><p>Merge + Tagging Refresher</p></td>
+<td><p>Lab 4 → Lab 5 graph structure</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>9:00–9:45</strong></p></td>
+<td><p>EDA &amp; Grouped Summaries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">egen</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code>, <code class="docutils literal notranslate"><span class="pre">total</span></code>, <code class="docutils literal notranslate"><span class="pre">median()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>9:45–10:30</strong></p></td>
+<td><p>Survival Analysis Setup (<code class="docutils literal notranslate"><span class="pre">over50</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stset</span></code>, <code class="docutils literal notranslate"><span class="pre">sts</span> <span class="pre">graph</span></code>, <code class="docutils literal notranslate"><span class="pre">stcox</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>10:30–11:15</strong></p></td>
+<td><p>Merge + Transform for Graphs</p></td>
+<td><p>Prepare merged vars for plotting</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>11:15–12:00</strong></p></td>
+<td><p>Final Graphs + Export</p></td>
+<td><p>Graph 1–5 in Lab 5</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>12:00–12:20</strong></p></td>
+<td><p>Lab Setup</p></td>
+<td><p>Students build <code class="docutils literal notranslate"><span class="pre">.do</span></code> for Lab 5</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="merge-lab-4-concepts-into-lab-5-with-purpose">
+<h2>🔁 Merge Lab 4 Concepts into Lab 5 with Purpose<a class="headerlink" href="#merge-lab-4-concepts-into-lab-5-with-purpose" title="Permalink to this heading">#</a></h2>
+<section id="use-egen-tag-to-prep-variables-for-graphs">
+<h3>🧩 <strong>1. Use <code class="docutils literal notranslate"><span class="pre">egen</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code> to prep variables for graphs</strong><a class="headerlink" href="#use-egen-tag-to-prep-variables-for-graphs" title="Permalink to this heading">#</a></h3>
+<p><strong>Before you graph</strong>, <strong>group your data smartly</strong>.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">* Center volume</span>
+<span class="k">egen</span> ctr_volume =<span class="k"> total</span>(tag(fake_id)),<span class="k"> by</span>(ctr_id)
+
+<span class="c1">* Only one record per center:</span>
+<span class="k">egen</span> one_ctr = tag(ctr_id)
+<span class="k">list</span> ctr_id ctr_volume<span class="k"> if</span> one_ctr
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="unknown-esrd-indicator">
+<h3>❓ <strong>2. Unknown ESRD indicator</strong><a class="headerlink" href="#unknown-esrd-indicator" title="Permalink to this heading">#</a></h3>
+<p>Used again in Lab 5, Q5 for <code class="docutils literal notranslate"><span class="pre">unknown</span></code></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> unknown = <span class="cs">///</span>
+    <span class="nf">inlist</span>(extended_dgn, <span class="cs">///</span>
+    <span class="s">&quot;ESRD UNKNOWN ETIOLOGY&quot;</span>, <span class="cs">///</span>
+    <span class="s">&quot;ESRD OF UNCERTAIN ETIOLOGY&quot;</span>, <span class="s">&quot;&quot;</span>) <span class="c1">// or trim/regex</span>
+
+<span class="k">count</span>
+<span class="k">count if</span> unknown <span class="o">==</span> <span class="m">1</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="died-within-6-months">
+<h3>⏱️ <strong>3. Died within 6 months</strong><a class="headerlink" href="#died-within-6-months" title="Permalink to this heading">#</a></h3>
+<p>Pre-setup for survival analysis in Lab 5</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> died_within_6mo = (died <span class="o">==</span> <span class="m">1</span> <span class="o">&amp;</span> end_d <span class="o">-</span> transplant_d <span class="o">&lt;=</span> <span class="m">180</span>)
+<span class="k">count if</span> died_within_6mo
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="wait-time-by-blood-type">
+<h3>⏳ <strong>4. Wait time by blood type</strong><a class="headerlink" href="#wait-time-by-blood-type" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">egen</span> mean_wait =<span class="k"> mean</span>(wait_yrs),<span class="k"> by</span>(abo)
+<span class="k">egen</span> med_wait  =<span class="k"> median</span>(wait_yrs),<span class="k"> by</span>(abo)
+<span class="k">egen</span> tag_blood = tag(abo)
+<span class="k">list</span> abo mean_wait med_wait<span class="k"> if</span> tag_blood
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="survival-setup-for-lab-5-graphs">
+<h2>⚰️ Survival Setup for Lab 5 Graphs<a class="headerlink" href="#survival-setup-for-lab-5-graphs" title="Permalink to this heading">#</a></h2>
+<p>These prep Lab 5 graphs — including <code class="docutils literal notranslate"><span class="pre">over50</span></code> stratified survival.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
+<span class="k">gen</span> f_time = end_d <span class="o">-</span> transplant_d
+<span class="k">format</span> transplant_d end_d <span class="nx">%td</span>
+
+<span class="k">stset</span> f_time, failure(died)
+
+<span class="k">sts graph</span>,<span class="k"> by</span>(over50)
+<span class="k">graph</span> export survival_by_over50<span class="m">.</span>png,<span class="k"> replace</span>
+
+<span class="k">stcox</span> over50
+</pre></div>
+</div>
+<hr class="docutils" />
+<section id="add-to-lab-5-q6-bonus-but-essential-now">
+<h3>🧪 Add to Lab 5 — Q6 (Bonus, but essential now)<a class="headerlink" href="#add-to-lab-5-q6-bonus-but-essential-now" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
+<span class="k">stset</span> f_time, failure(died)
+<span class="k">sts graph</span>,<span class="k"> by</span>(over50)
+<span class="k">graph</span> export lastname_q6<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p>Add:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">stcox</span> over50
+</pre></div>
+</div>
+<p>Print:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">di</span> <span class="s">&quot;Hazard ratio: &quot;</span> _b[over50] <span class="s">&quot; (95% CI &quot;</span> _b[over50] <span class="o">-</span> <span class="m">1.96</span><span class="o">*</span>_se[over50] <span class="s">&quot; – &quot;</span> _b[over50] <span class="o">+</span> <span class="m">1.96</span><span class="o">*</span>_se[over50] <span class="s">&quot;)&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="lab-5-do-scaffold-lab4-infused">
+<h2>💾 Lab 5 <code class="docutils literal notranslate"><span class="pre">.do</span></code> Scaffold (Lab4-infused)<a class="headerlink" href="#lab-5-do-scaffold-lab4-infused" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">clear</span> all
+<span class="k">set more</span> off
+<span class="k">log</span> using lab5_lastname<span class="m">.</span>log,<span class="k"> replace</span>
+
+<span class="c1">* Merge for setup</span>
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients<span class="m">.</span>dta
+<span class="k">drop if</span> _merge <span class="o">!=</span> <span class="m">3</span>
+
+<span class="c1">* Create ctr_volume</span>
+<span class="k">egen</span> ctr_volume =<span class="k"> total</span>(tag(fake_id)),<span class="k"> by</span>(ctr_id)
+
+<span class="c1">* Unknown cause</span>
+<span class="k">gen</span> unknown = <span class="nf">inlist</span>(extended_dgn, <span class="s">&quot;ESRD UNKNOWN ETIOLOGY&quot;</span>, <span class="s">&quot;ESRD OF UNCERTAIN ETIOLOGY&quot;</span>, <span class="s">&quot;&quot;</span>)
+
+<span class="c1">* Wait time by blood type</span>
+<span class="k">egen</span> mean_wait =<span class="k"> mean</span>(wait_yrs),<span class="k"> by</span>(abo)
+<span class="k">egen</span> med_wait  =<span class="k"> median</span>(wait_yrs),<span class="k"> by</span>(abo)
+<span class="k">egen</span> tag_blood = tag(abo)
+<span class="k">list</span> abo mean_wait med_wait<span class="k"> if</span> tag_blood
+
+<span class="c1">* Over50 variable for survival</span>
+<span class="k">gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
+<span class="k">gen</span> f_time = end_d <span class="o">-</span> transplant_d
+<span class="k">format</span> transplant_d end_d <span class="nx">%td</span>
+<span class="k">stset</span> f_time, failure(died)
+
+<span class="c1">* Q1–Q5 graph code goes here...</span>
+
+<span class="k">log close</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="takeaway">
+<h2>🧠 Takeaway<a class="headerlink" href="#takeaway" title="Permalink to this heading">#</a></h2>
+<p><strong>You cannot graph well without transforming meaningfully.</strong>
+Graphs are not step 1 — they are step 5.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter4.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4. 🗃️ Advanced file management</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="quickrefs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">📌 Quick References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-day-rework-lab-5-enriched-by-lab-4">💥 Final Day Rework: <strong>Lab 5, Enriched by Lab 4</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-walkthrough-plan-8-3012-20">👩🏽‍💻 <strong>Lecture + Walkthrough Plan (8:30–12:20)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-lab-4-concepts-into-lab-5-with-purpose">🔁 Merge Lab 4 Concepts into Lab 5 with Purpose</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-egen-tag-to-prep-variables-for-graphs">🧩 <strong>1. Use <code class="docutils literal notranslate"><span class="pre">egen</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code> to prep variables for graphs</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unknown-esrd-indicator">❓ <strong>2. Unknown ESRD indicator</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#died-within-6-months">⏱️ <strong>3. Died within 6 months</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wait-time-by-blood-type">⏳ <strong>4. Wait time by blood type</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survival-setup-for-lab-5-graphs">⚰️ Survival Setup for Lab 5 Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-to-lab-5-q6-bonus-but-essential-now">🧪 Add to Lab 5 — Q6 (Bonus, but essential now)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-5-do-scaffold-lab4-infused">💾 Lab 5 <code class="docutils literal notranslate"><span class="pre">.do</span></code> Scaffold (Lab4-infused)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaway">🧠 Takeaway</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Vincent Jin & Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
