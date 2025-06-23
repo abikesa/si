@@ -100,7 +100,7 @@ def main(commit_message, git_remote, ghp_remote):
 
     click.secho("🌿 Planting flicks...", fg="cyan")
     try:
-        run("python python/plant_flicks_frac.py --percent 23")
+        run("python code/plant_flicks_frac.py --percent 23")
     except Exception as e:
         click.secho(f"⚠️ Flick planting failed: {e}", fg="yellow")
 
